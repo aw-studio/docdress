@@ -2,6 +2,8 @@
 
 namespace Docdress;
 
+use Docdress\Parser\AlertParser;
+use Docdress\Parser\CodeParser;
 use Docdress\Parser\TocParser;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Filesystem\Filesystem;
@@ -51,10 +53,10 @@ class Documentor
      * @param  string $version
      * @return string
      */
-    public function getIndex($version)
+    public function getIndex($repo, $version)
     {
         $content = Str::after($this->parser->parse(
-            $this->files->get($this->path($version, 'readme')),
+            $this->files->get($this->path($repo, $version, 'readme')),
             [
 
             ]
@@ -88,21 +90,21 @@ class Documentor
     /**
      * Get documentation.
      *
-     * @param  string $repo
-     * @param  string $version
-     * @param         $page
-     * @param  [type] $subfolder
-     * @return void
+     * @param  string      $repo
+     * @param  string      $version
+     * @param  string      $page
+     * @param  string|null $subfolder
+     * @return string
      */
     public function get($repo, $version, $page, $subfolder = null)
     {
-        return $this->cache->remember("docs.{$version}.{$page}", 5, function () use ($version, $page) {
-            if (! $this->exists($version, $page)) {
+        return $this->cache->remember("docs.{$repo}.{$version}.{$page}", 5, function () use ($repo, $version, $page) {
+            if (! $this->exists($repo, $version, $page)) {
                 return;
             }
 
             return $this->parser->parse(
-                $this->files->get($this->path($version, $page)),
+                $this->files->get($this->path($repo, $version, $page)),
                 [
                     TocParser::class,
                     AlertParser::class,
@@ -112,8 +114,27 @@ class Documentor
         });
     }
 
-    protected function path($version, $page)
+    /**
+     * Get path.
+     *
+     * @param  string $repo
+     * @param  string $version
+     * @param  string $page
+     * @param  string $subfolder
+     * @return string
+     */
+    protected function path($repo, $version, $page = null, $subfolder = null)
     {
-        return resource_path("docs/{$version}/$page.md");
+        $path = resource_path("docs/{$repo}/{$version}");
+
+        if ($subfolder) {
+            $path .= "/{$subfolder}";
+        }
+
+        if ($page) {
+            $path .= "/{$path}.md";
+        }
+
+        return $path;
     }
 }

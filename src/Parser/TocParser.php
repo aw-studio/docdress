@@ -2,7 +2,6 @@
 
 namespace Docdress\Parser;
 
-use Docdress\MarkdownParserInterface;
 use Illuminate\Support\Str;
 
 class TocParser implements MarkdownParserInterface

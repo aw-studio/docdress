@@ -1,6 +1,6 @@
 <?php
 
-namespace Docdress;
+namespace Docdress\Parser;
 
 use Illuminate\Support\Str;
 

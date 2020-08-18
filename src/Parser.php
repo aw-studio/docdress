@@ -2,6 +2,9 @@
 
 namespace Docdress;
 
+use Docdress\Parser\HtmlParserInterface;
+use Docdress\Parser\MarkdownParserInterface;
+use Illuminate\Support\Collection;
 use ParsedownExtra;
 
 class Parser extends ParsedownExtra
@@ -31,7 +34,7 @@ class Parser extends ParsedownExtra
         $text = $this->text($text);
 
         return $this->runThroughParser(
-            $text, $text, $parser->filter(
+            $text, $parser->filter(
                 fn ($instance) => $instance instanceof HtmlParserInterface
             )
         );
@@ -40,15 +43,13 @@ class Parser extends ParsedownExtra
     /**
      * Run through parser.
      *
-     * @param  string $text
-     * @param         $parser
-     * @return void
+     * @param  string     $text
+     * @param  Collection $parser
+     * @return string
      */
     protected function runThroughParser($text, $parser)
     {
-        foreach ($parser as $instance) {
-            $text = $instance->parse($text);
-        }
+        $parser->each(fn ($instance) => $text = $instance->parse($text));
 
         return $text;
     }

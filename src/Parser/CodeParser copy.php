@@ -1,6 +1,6 @@
 <?php
 
-namespace Docdress;
+namespace Docdress\Parser;
 
 class CodeParser implements HtmlParserInterface
 {
