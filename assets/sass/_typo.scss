@@ -1,0 +1,89 @@
+// Fonts
+$headingFont: Roboto, sans-serif;
+$bodyFont: Inter, sans-serif;
+$codeFont: source-code-pro, monospace;
+
+// Default Typography Styles
+
+html {
+    font-size: 16px;
+}
+
+body,
+input,
+textarea,
+button {
+    font-family: $bodyFont;
+    font-weight: 400;
+    color: $black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+blockquote {
+    margin-top: 0;
+    @apply mb-4;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $headingFont;
+    font-weight: 500;
+}
+
+h1,
+.h1 {
+    font-size: 2.5rem;
+}
+
+h2,
+.h2 {
+    @apply text-3xl;
+}
+
+h3,
+.h3 {
+    @apply text-2xl;
+}
+
+h4,
+.h4 {
+    @apply text-xl;
+}
+
+p {
+    @apply text-base;
+    color: rgba($black, 0.7);
+}
+
+p a {
+}
+
+ul {
+}
+
+table {
+    th {
+    }
+
+    td {
+    }
+}
+
+a {
+    color: $purple;
+    text-decoration: underline;
+}

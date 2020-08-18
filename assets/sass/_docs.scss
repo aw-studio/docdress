@@ -1,0 +1,126 @@
+div#docs .content {
+    position: relative;
+
+    h1+ul {
+        list-style-type: none;
+
+        ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        ul li {
+            padding-left: 1.25rem;
+        }
+
+        >li {
+            @apply font-semibold;
+
+            li {
+                font-weight: 500;
+            }
+        }
+
+        li {
+            position: relative;
+            @apply text-sm;
+            margin-bottom: 0.5em;
+
+            p {
+                margin-bottom: 0;
+            }
+
+            a::before {
+                content: "# ";
+                color: #4951f2;
+            }
+        }
+
+        a {
+            color: $black;
+            text-decoration: none;
+        }
+    }
+
+    h2 .a:before {
+        content: "#";
+        font-weight: 400;
+        margin-left: -25px;
+        position: absolute;
+        font-size: 28px;
+        color: #4951f2;
+        opacity: 0.6;
+    }
+
+    ul li {
+        position: relative;
+    }
+
+    ul.list {
+        padding-left: 1.5rem;
+
+        li::before {
+            position: absolute;
+            content: "\F114";
+            font-size: 9px;
+            font-family: "Font Awesome 5 Free";
+            color: #4951f2;
+            top: 50%;
+            transform: translateY(-50%) translateX(-1rem);
+        }
+    }
+
+    h2 a:before,
+    h3 a:before {
+        content: "#";
+        font-weight: 400;
+        margin-left: -25px;
+        position: absolute;
+        font-size: 28px;
+        color: $purple;
+        opacity: 0.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        a {
+            color: $black;
+            text-decoration: none;
+        }
+    }
+
+    img {
+        box-shadow: 0 0 19px 0 rgba(235, 235, 235, 0.7);
+        border-radius: 0.5rem;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+        margin-bottom: 2em;
+
+        th,
+        td {
+            border: 1px solid $gray;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            font-size: 16px;
+        }
+    }
+
+    code {
+        @apply text-sm;
+    }
+
+    :not(pre)>code {
+        padding: 3px 6px;
+        border-radius: 3px;
+    }
+}

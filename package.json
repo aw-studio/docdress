@@ -1,0 +1,30 @@
+{
+	"name": "docdress",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/aw-studio/docdress.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/aw-studio/docdress/issues"
+	},
+	"homepage": "https://github.com/aw-studio/docdress#readme",
+	"dependencies": {},
+	"devDependencies": {
+		"cross-env": "^7.0.2",
+		"font-awesome": "^4.7.0",
+		"laravel-mix": "^5.0.4",
+		"resolve-url-loader": "^3.1.0",
+		"sass": "^1.26.10",
+		"sass-loader": "^8.0.2",
+		"tailwindcss": "^1.6.2",
+		"vue-template-compiler": "^2.6.11"
+	}
+}

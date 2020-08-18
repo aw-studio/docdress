@@ -1,0 +1,60 @@
+div.layout-docs {
+
+    aside.sidebar {
+        width: 290px;
+        height: 100vh;
+
+        &::before {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 999em;
+            height: 100%;
+            background: -webkit-gradient(linear,
+                    left bottom,
+                    left top,
+                    from(#ffffff),
+                    to(#f5f5fa));
+            background: linear-gradient(to top, #ffffff, #f5f5fa);
+        }
+
+        h2 {
+            @apply text-sm font-semibold;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        li {
+            @apply text-sm;
+            padding: 0.65em 0;
+            display: block;
+
+            &.active {
+                background: #e8f0f9;
+                border-right: 3px solid #4951f2;
+            }
+
+            a {
+                text-decoration: none;
+                color: $black;
+            }
+        }
+
+        ul {
+            margin-bottom: 0;
+        }
+
+        ul ul {
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        ul ul li {
+            a {
+                padding-left: 0.75rem;
+            }
+        }
+    }
+}
