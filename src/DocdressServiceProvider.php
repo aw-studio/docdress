@@ -24,5 +24,9 @@ class DocdressServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../views', 'docdress');
+
+        $this->publishes([
+            __DIR__.'/../publish/' => public_path(),
+        ], 'assets');
     }
 }
