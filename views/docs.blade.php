@@ -1,26 +1,26 @@
 @extends('docdress::layout')
 
 @section('content')
-    <div class="layout-docs" id="docs">
+    <div class="layout-docs relative" id="docs">
 
-        <div class="container">
+        <div class="container mx-auto flex">
             
-            <aside class="sidebar pt-12">
+            <aside class="sidebar sticky overflow-visible top-0 pt-12">
                 <div class="logo">
                     <a href="/" class="text-3xl text-purple">Fjuse</a>
                 </div>
                 
-                <nav>
+                <nav class="absolute overflow-y-scroll bottom-0 left-0 right-0 py-6" style="top:6rem;">
                     <div>
                         {!! $index !!}
                     </div>
                 </nav>
             </aside>
 
-            <section class="p-12" style="900px">
+            <section class="p-24 flex-1">
                 <div class="content w-3/4">
 
-                    {!! $content !!}
+                {!! $content !!}
 
                 </div>
                 <div class="controls">

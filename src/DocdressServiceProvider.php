@@ -2,6 +2,8 @@
 
 namespace Docdress;
 
+use Docdress\Commands\CloneCommand;
+use Docdress\Commands\UpdateCommand;
 use Illuminate\Support\ServiceProvider;
 
 class DocdressServiceProvider extends ServiceProvider
@@ -13,7 +15,12 @@ class DocdressServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(DocdressRouteServiceProvider::class);
+
+        $this->commands([
+            CloneCommand::class,
+            UpdateCommand::class,
+        ]);
     }
 
     /**
@@ -28,5 +35,13 @@ class DocdressServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../publish/public' => public_path('docdress'),
         ], 'assets');
+
+        $this->publishes([
+            __DIR__.'/../publish/config/docdress.php' => config_path('docdress.php'),
+        ], 'config');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../publish/config/docdress.php', 'docdress'
+        );
     }
 }
