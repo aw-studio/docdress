@@ -2,6 +2,8 @@
 
 namespace Docdress\Parser;
 
+use Illuminate\Support\Str;
+
 class LinkNameParser implements HtmlParserInterface
 {
     /**

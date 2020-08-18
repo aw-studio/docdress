@@ -42,7 +42,7 @@ class CloneCommand extends Command
         foreach (config("docdress.repos.{$repo}.versions") as $version => $title) {
             Git::clone($repo, $version, $subfolder = config("docdress.repos.{$repo}.subfolder"));
             $this->publishScreens($repo, $version, $subfolder);
-            $this->info("Cloned {$repo} [$version]");
+            $this->info("Cloned {$repo}[$version]");
         }
     }
 

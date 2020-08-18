@@ -4,6 +4,8 @@ namespace Docdress;
 
 use Docdress\Parser\AlertParser;
 use Docdress\Parser\CodeParser;
+use Docdress\Parser\LinkNameParser;
+use Docdress\Parser\LinkParser;
 use Docdress\Parser\TocParser;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Filesystem\Filesystem;
@@ -108,6 +110,8 @@ class Documentor
                 TocParser::class,
                 AlertParser::class,
                 CodeParser::class,
+                LinkParser::class,
+                LinkNameParser::class,
             ];
 
             return $this->parser->parse(

@@ -49,7 +49,9 @@ class Parser extends ParsedownExtra
      */
     protected function runThroughParser($text, $parser)
     {
-        $parser->each(fn ($instance) => $text = $instance->parse($text));
+        foreach ($parser as $instance) {
+            $text = $instance->parse($text);
+        }
 
         return $text;
     }

@@ -5,17 +5,15 @@ namespace Docdress\Commands;
 use Docdress\Git;
 use Illuminate\Console\Command;
 
-class UpdateCommand extends Command
+class StatusCommand extends Command
 {
-    use Concerns\ManagesScreens;
-
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'docdress:update {repository}
-                            {--branch= : The version that should be updated}';
+    protected $signature = 'docdress:status {repository}
+                            {--branch= : The version that should be checked}';
 
     /**
      * The console command description.
@@ -46,10 +44,8 @@ class UpdateCommand extends Command
         }
 
         foreach ($versions as $version => $title) {
-            $subfolder = config("docdress.repos.{$repo}.subfolder");
-            Git::pull($repo, $version, $subfolder);
-            $this->publishScreens($repo, $version, $subfolder);
-            $this->info("Updated {$repo}[$version]");
+            $status = Git::status($repo, $version);
+            $this->line("{$repo}[{$version}]: {$status}");
         }
     }
 }

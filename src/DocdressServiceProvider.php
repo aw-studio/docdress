@@ -3,6 +3,7 @@
 namespace Docdress;
 
 use Docdress\Commands\CloneCommand;
+use Docdress\Commands\StatusCommand;
 use Docdress\Commands\UpdateCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +19,7 @@ class DocdressServiceProvider extends ServiceProvider
         $this->commands([
             CloneCommand::class,
             UpdateCommand::class,
+            StatusCommand::class,
         ]);
     }
 
