@@ -15,8 +15,6 @@ class DocdressServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(DocdressRouteServiceProvider::class);
-
         $this->commands([
             CloneCommand::class,
             UpdateCommand::class,
@@ -43,5 +41,7 @@ class DocdressServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../publish/config/docdress.php', 'docdress'
         );
+
+        $this->app->register(DocdressRouteServiceProvider::class);
     }
 }

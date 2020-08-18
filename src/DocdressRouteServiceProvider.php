@@ -14,6 +14,11 @@ class DocdressRouteServiceProvider extends RouteServiceProvider
      */
     public function map()
     {
-        Route::get('/'.config('docdress.route_prefix').'/{version?}/{page?}');
+        foreach (config('docdress.repos') as $repo => $config) {
+            Route::redirect($config['route_prefix'], '/'.$config['route_prefix'].'/'.$config['default_version']);
+            Route::get('/'.$config['route_prefix'].'/{version}/{page?}/{sub_page?}', [
+                DocdressController::class, 'show',
+            ])->name("docdress.docs.{$repo}");
+        }
     }
 }

@@ -56,6 +56,7 @@ class Documentor
     public function index($repo, $version, $subfolder = null)
     {
         $content = Str::after($this->parser->parse(
+
             $this->files->get($this->path($repo, $version, 'readme')),
             [
 
@@ -125,7 +126,7 @@ class Documentor
      * @param  string $subfolder
      * @return string
      */
-    protected function path($repo, $version, $page = null, $subfolder = null)
+    public function path($repo, $version, $page = null, $subfolder = null)
     {
         $path = resource_path("docs/{$repo}/{$version}");
 
@@ -137,6 +138,6 @@ class Documentor
             $path .= "/{$page}.md";
         }
 
-        return $path;
+        return preg_replace('#/+#', '/', $path);
     }
 }

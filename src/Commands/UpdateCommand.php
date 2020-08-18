@@ -12,7 +12,7 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'docdress:update 
+    protected $signature = 'docdress:update {repository}
                             {--branch= : The version that should be updated}';
 
     /**
@@ -20,7 +20,7 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Update the documentaition repository.';
+    protected $description = 'Update the repository.';
 
     /**
      * Execute the console command.
@@ -29,16 +29,23 @@ class UpdateCommand extends Command
      */
     public function handle()
     {
+        $repo = $this->argument('repository');
+
+        if (! array_key_exists($repo, config('docdress.repos'))) {
+            return $this->error("Couldn't find {$repo} in config [docdress.repos].");
+        }
+
         $version = $this->option('branch');
 
         if ($version != 0) {
             $versions = [$version => null];
         } else {
-            $versions = config('docdress.versions');
+            $versions = config("docdress.repos.{$repo}.versions");
         }
 
         foreach ($versions as $version => $title) {
-            Git::pull($repo = config('docdress.repository'), $version, config('docdress.subfolder'));
+            $subfolder = config("docdress.repos.{$repo}.subfolder");
+            Git::pull($repo, $version, $subfolder);
             $this->info("Updated {$repo} [$version]");
         }
     }
