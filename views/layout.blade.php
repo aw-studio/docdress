@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Docs</title>
+    <title>Fjuse</title>
 
     <x-styles/>
     <link rel="stylesheet" href="/docdress/css/app.css?t={{ time() }}">
@@ -18,6 +18,9 @@
     <x-script>
         function ready(f){/in/.test(document.readyState)?setTimeout('ready('+f+')',9):f()}
     </x-script>
+
+    <script src="/docdress/js/app.js"></script>
     <x-scripts/>
+    
 </body>
 </html>

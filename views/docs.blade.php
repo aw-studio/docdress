@@ -1,4 +1,4 @@
-@extends('app')
+@extends('docdress::layout')
 
 @section('content')
     <div class="layout-docs" id="docs">
@@ -7,7 +7,7 @@
             
             <aside class="sidebar pt-12">
                 <div class="logo">
-                    <a href="/" class="text-3xl text-purple">AW-Studio</a>
+                    <a href="/" class="text-3xl text-purple">Fjuse</a>
                 </div>
                 
                 <nav>
@@ -23,9 +23,16 @@
                     {!! $content !!}
 
                 </div>
+                <div class="controls">
+                    <select class="w-100">
+                        <option value="2.4">2.4</option>
+                    </select>
+                </div>
+                
             </section>
             
         </div>
+
     </div>
     
     <x-script>
@@ -61,5 +68,4 @@
         });
     })
     </x-script>
-    <script src="/js/docs.js"></script>
 @stop

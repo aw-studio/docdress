@@ -53,7 +53,7 @@ class Documentor
      * @param  string $version
      * @return string
      */
-    public function getIndex($repo, $version)
+    public function index($repo, $version, $subfolder = null)
     {
         $content = Str::after($this->parser->parse(
             $this->files->get($this->path($repo, $version, 'readme')),
@@ -103,13 +103,15 @@ class Documentor
                 return;
             }
 
+            $parser = [
+                TocParser::class,
+                AlertParser::class,
+                CodeParser::class,
+            ];
+
             return $this->parser->parse(
                 $this->files->get($this->path($repo, $version, $page)),
-                [
-                    TocParser::class,
-                    AlertParser::class,
-                    CodeParser::class,
-                ]
+                $parser
             );
         });
     }
@@ -132,7 +134,7 @@ class Documentor
         }
 
         if ($page) {
-            $path .= "/{$path}.md";
+            $path .= "/{$page}.md";
         }
 
         return $path;
