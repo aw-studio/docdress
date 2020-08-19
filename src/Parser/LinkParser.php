@@ -22,7 +22,11 @@ class LinkParser implements HtmlParserInterface
             }
 
             if (array_key_exists('host', parse_url($link))) {
-                $replace = "{$link}\" target=\"_blank";
+                $replace = $link;
+
+                if (config('docdress.open_external_links_in_new_tab')) {
+                    $replace .= '" target="_blank';
+                }
             } else {
                 $replace = route(request()->route()->getName(), [
                     'version' => request()->route('version'),

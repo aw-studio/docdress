@@ -3,6 +3,8 @@
 return [
     'path' => resource_path('docs'),
 
+    'open_external_links_in_new_tab' => true,
+
     'repos' => [
         'my/repo' => [
             'route_prefix'    => 'docs',
