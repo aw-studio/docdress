@@ -4,24 +4,11 @@ return [
     'path' => resource_path('docs'),
 
     'repos' => [
-        'fjuse/docs' => [
+        'my/repo' => [
             'route_prefix'    => 'docs',
             'subfolder'       => null,
             'default_page'    => 'introduction',
-            'default_version' => '2.4',
-            'webhook_token'   => env('GITHUB_WEBHOOK_TOKEN', null),
-            'versions'        => [
-                'master' => 'Master',
-                '2.4'    => '2.4',
-            ],
-        ],
-        'aw-studio/docs' => [
-            'route_prefix'    => 'aw-docs',
-            'subfolder'       => null,
-            'default_page'    => 'introduction',
             'default_version' => 'master',
-            'access_token'    => env('GITHUB_ACCESS_TOKEN', null),
-            'webhook_token'   => env('GITHUB_WEBHOOK_TOKEN', null),
             'versions'        => [
                 'master' => 'Master',
             ],
