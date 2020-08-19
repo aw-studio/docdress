@@ -222,9 +222,9 @@ And the `token` from your config must be specified.
 ],
 ```
 
-<a name="authentication">
+<a name="authorization">
 
-## Authentication
+## Authorization
 
 You may create gate for a repository in the `boot` method of your
 `AuthServiceProvider` to manage access to the documentation.
