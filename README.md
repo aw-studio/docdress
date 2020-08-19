@@ -18,6 +18,7 @@ Laravel project.
     -   [Versions](#versions)
     -   [Private repositories](#private-repositories)
     -   [Webhook](#webhook)
+-   [Alerts](#alerts)
 
 <a name="introduction"></a>
 
@@ -217,6 +218,8 @@ And the `token` from your config must be specified.
 
 ],
 ```
+
+<a name="alerts">
 
 ## Alerts
 
