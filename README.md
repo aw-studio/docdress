@@ -1,13 +1,17 @@
 # Docdress
 
-A package to deploy markdown documentations from GitHub repositories to your
-Laravel site.
+A package to create markdown documentations from GitHub repositories in your
+Laravel project.
 
 ![Docdress](screen.png 'Docdress')
 
 ## Setup
 
-The package gets installed.
+Install **Docdress** via composer:
+
+```shell
+composer require aw-studio/docdress
+```
 
 ## Versions
 
@@ -51,6 +55,11 @@ folder is cloned and displayed.
 ## Webhook
 
 If you want the latest version to be automatically updated with every push, you
-have to set a webhook with the url `_docdress/update`. Additionally the
-**Content-Type** must be set to `application/json` and the token from your
-config must be specified.
+have to set a webhook with the url `_docdress/update`.
+
+![webhook-url](webhook-url.png 'Webhook Url')
+
+Additionally the **Content-Type** must be set to `application/json` and the
+token from your config must be specified.
+
+![webhook-content-type](webhook-content-type.png 'Webhook Content Type')
