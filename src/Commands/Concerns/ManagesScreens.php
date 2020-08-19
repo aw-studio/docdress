@@ -11,6 +11,14 @@ use SplFileInfo;
 
 trait ManagesScreens
 {
+    /**
+     * Publish screens.
+     *
+     * @param  string $repo
+     * @param  string $version
+     * @param  string $subfolder
+     * @return void
+     */
     protected function publishScreens($repo, $version, $subfolder)
     {
         $path = app(Documentor::class)->path($repo, $version, null, $subfolder);

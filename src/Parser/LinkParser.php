@@ -14,7 +14,7 @@ class LinkParser implements HtmlParserInterface
      */
     public function parse($text)
     {
-        preg_match_all('/(?<=\bhref=")[^"]*/', $text, $matches);
+        $matches = $this->getLinksOutsideOfCodeBlocks($text);
 
         foreach ($matches[0] as $link) {
             if (Str::startsWith($link, '#')) {
@@ -26,13 +26,34 @@ class LinkParser implements HtmlParserInterface
             } else {
                 $replace = route(request()->route()->getName(), [
                     'version' => request()->route('version'),
-                    'page'    => $link,
+                    'page'    => preg_replace('#/+#', '/', $link),
                 ]);
+
+                $replace .= '" data-turbolinks-action="replace';
             }
 
             $text = str_replace($link, $replace, $text);
         }
 
         return $text;
+    }
+
+    /**
+     * Get links outside of code blocks.
+     *
+     * @param  string $text
+     * @return array
+     */
+    protected function getLinksOutsideOfCodeBlocks($text)
+    {
+        preg_match_all('#<\s*?code\b[^>]*>(.*?)</code\b[^>]*>#s', $text, $matches);
+
+        foreach ($matches[0] as $match) {
+            $text = str_replace($match, '', $text);
+        }
+
+        preg_match_all('/(?<=\bhref=")[^"]*/', $text, $matches);
+
+        return $matches;
     }
 }

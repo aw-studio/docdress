@@ -48,8 +48,14 @@ div.layout-docs {
 		}
 
 		ul ul {
-			display: none;
+			max-height: 0;
+			overflow: hidden;
 			margin-top: 0.5rem;
+			transition: max-height 0.45s ease;
+
+			&.expanded {
+				max-height: none;
+			}
 		}
 
 		ul ul li {

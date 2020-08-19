@@ -3,7 +3,7 @@
 namespace Docdress;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\View\View;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -36,13 +36,29 @@ class DocdressController
     public function webhook(Request $request)
     {
         $version = last(explode('/', $request->ref));
-        $repo = $request->repository->full_name ?? null;
+        $repo = $request->repository['full_name'] ?? null;
+
+        if (! array_key_exists($repo, config('docdress.repos'))) {
+            return;
+        }
+
+        $githubPayload = $request->getContent();
+        $githubHash = $request->header('X-Hub-Signature');
+        $localToken = config("docdress.repos.{$repo}.webhook_token");
+        $localHash = 'sha1='.hash_hmac('sha1', $githubPayload, $localToken, false);
+
+        if (! hash_equals($githubHash, $localHash)) {
+            return;
+        }
 
         if (! $this->docs->exists($repo, $version)) {
             return;
         }
 
-        Git::pull($repo, $version);
+        Artisan::call('docdress:update', [
+            'repository' => $repo,
+            '--branch'   => $version,
+        ]);
     }
 
     /**
@@ -62,29 +78,43 @@ class DocdressController
         }
 
         if (! $page) {
-            $page = config('docdress.default_page');
+            $page = config("docdress.repos.{$repo}.default_page");
         }
 
         if ($subPage) {
             $page .= "/{$subPage}";
         }
 
-        $content = $this->docs->get(
-            $repo, $version, $page
-        );
-        $version = $this->docs->index(
-            $repo, $version, 'readme'
-        );
+        $content = $this->getContent($repo, $version, $page);
+
+        $index = $this->docs->index($repo, $version, 'readme');
 
         $title = (new Crawler($content))->filterXPath('//h1');
 
         return view('docdress::docs', [
-            'index'          => $version,
+            'index'          => $index,
             'title'          => $title,
             'content'        => $content,
-            'versions'       => config('docdress.versions'),
+            'versions'       => config("docdress.repos.{$repo}.versions"),
             'currentVersion' => $version,
         ]);
+    }
+
+    /**
+     * Get docs content.
+     *
+     * @param  string $repo
+     * @param  string $version
+     * @param  string $page
+     * @return string
+     */
+    protected function getContent($repo, $version, $page)
+    {
+        if ($this->docs->exists($repo, $version, $page)) {
+            return $this->docs->get($repo, $version, $page);
+        }
+
+        return (string) view('docdress::not-found');
     }
 
     /**

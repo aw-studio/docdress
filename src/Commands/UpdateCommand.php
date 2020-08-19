@@ -8,7 +8,6 @@ use Illuminate\Console\Command;
 class UpdateCommand extends Command
 {
     use Concerns\ManagesScreens;
-
     /**
      * The name and signature of the console command.
      *

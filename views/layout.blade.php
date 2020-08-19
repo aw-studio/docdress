@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="/docdress/css/app.css?t={{ time() }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
+    <script src="/docdress/js/app.js"></script>
+    
 </head>
 <body>
     
@@ -17,9 +21,12 @@
 
     <x-script>
         function ready(f){/in/.test(document.readyState)?setTimeout('ready('+f+')',9):f()}
-    </x-script>
 
-    <script src="/docdress/js/app.js"></script>
+        ready(function() {
+            Prism.highlightAll()
+        });
+    </x-script>
+    
     <x-scripts/>
     
 </body>

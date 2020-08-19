@@ -14,8 +14,11 @@ class DocdressRouteServiceProvider extends RouteServiceProvider
      */
     public function map()
     {
+        Route::post('_docdress/update', [DocdressController::class, 'webhook'])->name('docdress.webhook');
+
         foreach (config('docdress.repos') as $repo => $config) {
             Route::redirect($config['route_prefix'], '/'.$config['route_prefix'].'/'.$config['default_version']);
+
             Route::get('/'.$config['route_prefix'].'/{version}/{page?}/{sub_page?}', [
                 DocdressController::class, 'show',
             ])->name("docdress.docs.{$repo}");
