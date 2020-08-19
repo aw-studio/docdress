@@ -7,7 +7,7 @@
             
             <aside class="sidebar sticky overflow-visible top-0 pt-12">
                 <div class="logo">
-                    <a href="/" class="text-3xl text-purple">Fjuse</a>
+                    <a href="/" class="text-3xl">Fjuse</a>
                 </div>
                 
                 <nav class="absolute overflow-y-scroll bottom-0 left-0 right-0 py-6" style="top:6rem;">

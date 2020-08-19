@@ -6,8 +6,8 @@
         </svg>
     </button>
 
-    <div class="dd-search-results absolute rounded-lg border-gray-500 border left-0 right-0 px-6">
-        <div class="dd-search-result border-gray-500">
+    <div class="dd-search-results absolute rounded-lg border-gray-400 border left-0 right-0" style="display:none;">
+        <div class="dd-search-result border-gray-400">
             <h5 class="dd-search-result__title">Input</h5>
             <div class="dd-search-result__subtitle color-gray-900">
                 Introduction > lol
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="dd-search-result border-gray-500">
+        <div class="dd-search-result border-gray-400">
             <h5 class="dd-search-result__title">Input</h5>
             <div class="dd-search-result__subtitle color-gray-900">
                 abc > lol
@@ -67,7 +67,7 @@
                 margin-top: 1px;
                 position: absolute;
                 font-size: 16px;
-                color: #4951f2;
+                color: var(--primary);
                 opacity: .6;
             }
         }

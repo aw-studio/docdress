@@ -122,6 +122,20 @@ class Documentor
     }
 
     /**
+     * Get theme for the given repository.
+     *
+     * @param  string $repo
+     * @return array
+     */
+    public function theme($repo)
+    {
+        $themes = config('docdress.themes');
+
+        return $themes[config("docdress.repos.{$repo}.theme")]
+            ?? $themes['default'];
+    }
+
+    /**
      * Get path.
      *
      * @param  string $repo

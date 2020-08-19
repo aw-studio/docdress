@@ -6,6 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fjuse</title>
 
+    <style>
+        :root {
+            @foreach($theme as $var => $value)
+            --{{ $var }}: {{ $value }};
+            @endforeach
+        }
+    </style>
+
     <x-styles/>
     <link rel="stylesheet" href="/docdress/css/app.css?t={{ time() }}">
 
@@ -13,7 +21,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
     <script src="/docdress/js/app.js"></script>
-    
+
 </head>
 <body>
     

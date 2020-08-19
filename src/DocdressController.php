@@ -88,6 +88,7 @@ class DocdressController
         $content = $this->getContent($repo, $version, $page);
 
         $index = $this->docs->index($repo, $version, 'readme');
+        $theme = $this->docs->theme($repo);
 
         $title = (new Crawler($content))->filterXPath('//h1');
 
@@ -97,6 +98,7 @@ class DocdressController
             'content'        => $content,
             'versions'       => config("docdress.repos.{$repo}.versions"),
             'currentVersion' => $version,
+            'theme'          => $theme,
         ]);
     }
 
