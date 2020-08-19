@@ -39,8 +39,11 @@ class CloneCommand extends Command
 
         $this->prepareResourceDirectory();
 
+        $subfolder = config("docdress.repos.{$repo}.subfolder");
+        $token = config("docdress.repos.{$repo}.access_token");
+
         foreach (config("docdress.repos.{$repo}.versions") as $version => $title) {
-            Git::clone($repo, $version, $subfolder = config("docdress.repos.{$repo}.subfolder"));
+            Git::clone($repo, $version, $subfolder, $token);
             $this->publishScreens($repo, $version, $subfolder);
             $this->info("Cloned {$repo}[$version]");
         }

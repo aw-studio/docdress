@@ -12,30 +12,32 @@ class Git
      * @param  string      $repo
      * @param  string      $branch
      * @param  string|null $subfolder
+     * @param  string      $token
      * @return void
      */
-    public static function pullOrClone($repo, $branch = 'master', $subfolder = null)
+    public static function pullOrClone($repo, $branch = 'master', $subfolder = null, $token = null)
     {
         if (realpath(self::path($repo, $branch))) {
             return self::pull($repo, $branch);
         } else {
-            return self::clone($repo, $branch, $subfolder);
+            return self::clone($repo, $branch, $subfolder, $token);
         }
     }
 
     /**
      * Clone repository.
      *
-     * @param  string $repo
-     * @param  string $branch
+     * @param  string      $repo
+     * @param  string      $branch
+     * @param  string|null $token
      * @return void
      */
-    public static function clone($repo, $branch = 'master', $subfolder = null)
+    public static function clone($repo, $branch, $subfolder, $token = null)
     {
         if (! is_null($subfolder)) {
-            return self::cloneSubfolder($repo, $branch, $subfolder);
+            return self::cloneSubfolder($repo, $branch, $subfolder, $token);
         } else {
-            return self::cloneRoot($repo, $branch);
+            return self::cloneRoot($repo, $branch, $token);
         }
     }
 
@@ -56,12 +58,13 @@ class Git
     /**
      * Clone subfolder.
      *
-     * @param  string $repo
-     * @param  string $branch
-     * @param  string $folder
+     * @param  string      $repo
+     * @param  string      $branch
+     * @param  string      $folder
+     * @param  string|null $token
      * @return void
      */
-    protected static function cloneSubfolder($repo, $branch, $folder)
+    protected static function cloneSubfolder($repo, $branch, $folder, $token = null)
     {
         $path = self::path($repo, $branch);
 
@@ -69,7 +72,7 @@ class Git
         exec('
             cd '.$path.' \
             && git init \
-            && git remote add -f origin '.self::cloneUrl($repo).' \
+            && git remote add -f origin '.self::cloneUrl($repo, $token).' \
             && git config core.sparseCheckout true \
             && echo "/'.$folder.'" >> .git/info/sparse-checkout \
             && git checkout '.$branch.' \
@@ -80,14 +83,15 @@ class Git
     /**
      * Clone full repository.
      *
-     * @param  string $repo
-     * @param  string $branch
+     * @param  string      $repo
+     * @param  string      $branch
+     * @param  string|null $token
      * @return void
      */
-    protected static function cloneRoot($repo, $branch)
+    protected static function cloneRoot($repo, $branch, $token = null)
     {
         $path = self::path($repo, $branch);
-        $url = self::cloneUrl($repo);
+        $url = self::cloneUrl($repo, $token);
 
         exec('
             git clone -b '.$branch.' '.$url.' '.$path.' \
@@ -99,11 +103,16 @@ class Git
     /**
      * Get clone url for repo.
      *
-     * @param  string $repo
+     * @param  string      $repo
+     * @param  string|null $token
      * @return string
      */
-    protected static function cloneUrl($repo)
+    protected static function cloneUrl($repo, $token = null)
     {
+        if ($token) {
+            return "https://{$token}@github.com/{$repo}.git";
+        }
+
         return "https://github.com/{$repo}.git";
     }
 
