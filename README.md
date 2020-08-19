@@ -61,7 +61,7 @@ php artisan docdress:clone `my/repo`
 
 ## Configuration
 
-With **Docdress** any number of repositories can be documented in a laravel
+With **Docdress** any number of repositories can be documented in one laravel
 project. Each repository is configured in `docdress.repos` like so:
 
 ```php
