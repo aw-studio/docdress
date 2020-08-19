@@ -25,6 +25,19 @@ Laravel project.
 
 ## Introduction
 
+With Docdress you can turn your project/package documentation within minutes
+into a web interface with a Laravel-like design.
+
+Docdress offers the following features:
+
+-   Laravel-like design
+-   Documentation for private repositories
+-   Documentation from subfolders of repositories
+-   Automatically updated by webhooks
+-   Any number of repositories in a Laravel project
+-   Custom themes
+-   Authentication
+
 <a name="setup"></a>
 
 ## Setup
@@ -49,11 +62,9 @@ Add the desired repository to the `docdress` config.
 
 ```php
 'repos' => [
-
     'my/repo' => [
         //
     ],
-
 ],
 ```
 
