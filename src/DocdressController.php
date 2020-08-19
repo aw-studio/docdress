@@ -2,13 +2,17 @@
 
 namespace Docdress;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 use Symfony\Component\DomCrawler\Crawler;
 
 class DocdressController
 {
+    use AuthorizesRequests;
+
     /**
      * Documentor instance.
      *
@@ -73,8 +77,12 @@ class DocdressController
     {
         $repo = $this->getRequestRepo($request);
 
+        if (Gate::has("docdress.{$repo}")) {
+            $this->authorize("docdress.{$repo}");
+        }
+
         if (! $this->isValidVersion($repo, $version)) {
-            return redirect(route('docdress.docs', ['version' => config('docdress.default_version')]));
+            return redirect(route("docdress.docs.{$repo}", ['version' => config("docdress.repos.{$repo}.default_version")]));
         }
 
         if (! $page) {

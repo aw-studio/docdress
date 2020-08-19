@@ -18,6 +18,7 @@ Laravel project.
     -   [Versions](#versions)
     -   [Private repositories](#private-repositories)
     -   [Webhook](#webhook)
+-   [Authorization](#authorization)
 -   [Alerts](#alerts)
 
 <a name="introduction"></a>
@@ -219,6 +220,26 @@ And the `token` from your config must be specified.
     ],
 
 ],
+```
+
+<a name="authentication">
+
+## Authentication
+
+You may create gate for a repository in the `boot` method of your
+`AuthServiceProvider` to manage access to the documentation.
+
+```php
+use Docdress\Docdress;
+
+public function boot()
+{
+    $this->registerPolicies();
+
+    Docdress::gate('my/repo', function ($user) {
+        return $user->is_admin;
+    });
+}
 ```
 
 <a name="alerts">
