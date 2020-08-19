@@ -11,6 +11,7 @@ Laravel project.
 -   [Setup](#setup)
     -   [Add repository to Config](#add-repository-to-config)
     -   [Clone repository](#clone-repository)
+-   [Readme.md](#readme)
 -   [Configuration](#configuration)
     -   [Versions](#versions)
     -   [Private repositories](#private-repositories)
@@ -55,6 +56,27 @@ Once you have configured the repository, you must clone it using
 
 ```shell
 php artisan docdress:clone `my/repo`
+```
+
+<a name="readme"></a>
+
+## Readme.md
+
+The index is built as a nested list in the `readme.md`. It is located under
+`## Index`. So your `readme.md` could look like this:
+
+```markdown
+# My Package
+
+Hello World.
+
+## Index
+
+-   ## Getting Started
+    -   [Introduction](/introduction.md)
+    -   [Installation](/installation.md)
+-   ## Foo
+    -   [Bar](subfolder/bar.md)
 ```
 
 <a name="configuration"></a>
