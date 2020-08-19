@@ -40,4 +40,14 @@
         </div>
 
     </div>
+
+    <x-script>
+        ready(function() {
+            let section = window.location.href.split('#')[1];
+            if(!section) {
+                return;
+            }
+            document.querySelector('a[name="'+section+'"]').scrollIntoView(true)
+        });
+    </x-script>
 @stop
