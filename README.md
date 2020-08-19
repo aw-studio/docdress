@@ -9,6 +9,27 @@ Laravel site.
 
 The package gets installed.
 
+## Versions
+
+Every version is representing a branch. Set the `default_version` to your
+default branch. The versions are specified as branch name and title, like so:
+
+```php
+'repos' => [
+
+    'my/repo' => [
+        // ...
+
+        'default_version' => 'master',
+        'versions'        => [
+            'master' => 'Master',
+            '1.0'    => '1.0'
+        ]'
+    ],
+
+],
+```
+
 ## Subfolder
 
 You may have the documentation of a project or a package in a subfolder of the
