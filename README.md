@@ -12,7 +12,7 @@ Laravel project.
     -   [Add repository to Config](#add-repository-to-config)
     -   [Clone repository](#clone-repository)
 -   [Structure](#structure)
-    -   [Readme.md](#readme)
+    -   [Readme.md](#readme-me)
     -   [Table of Contents](#toc)
 -   [Configuration](#configuration)
     -   [Versions](#versions)
@@ -64,7 +64,7 @@ php artisan docdress:clone `my/repo`
 
 ## Structure
 
-<a name="readme"></a>
+<a name="readme-me"></a>
 
 ### Readme.md
 
