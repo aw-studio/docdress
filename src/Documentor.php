@@ -69,10 +69,22 @@ class Documentor
 
         foreach ($matches[0] as $match) {
             $page = str_replace('.md', '', $match);
-            $content = str_replace($match, trim("/docs/{$version}/$page"), $content);
+            $link = preg_replace('#/+#', '/', '/'.$this->routePrefix($repo)."/{$version}/$page");
+            $content = str_replace($match, $link, $content);
         }
 
         return $content;
+    }
+
+    /**
+     * Get the route prefix for the given repository.
+     *
+     * @param  string $repo
+     * @return string
+     */
+    protected function routePrefix($repo)
+    {
+        return config("docdress.repos.{$repo}.route_prefix");
     }
 
     /**
