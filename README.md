@@ -3,6 +3,8 @@
 A package to deploy markdown documentations from GitHub repositories to your
 Laravel site.
 
+![Docdress](screen.png 'Docdress')
+
 ## Setup
 
 The package gets installed.
