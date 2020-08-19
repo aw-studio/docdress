@@ -126,6 +126,8 @@ The following attributes can be configured for a repository:
     the documentation.
 -   `default_version` - The current version.
 -   `subfolder` - The subfolder of the documentation.
+-   `theme` - The theme that should be used for this repo. Default value:
+    `default`.
 -   `access_token` - Personal access token for private repositories.
 -   `webhook_token` - Webhook token to allow pulling the repository after a
     change.
