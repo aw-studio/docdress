@@ -11,7 +11,9 @@ Laravel project.
 -   [Setup](#setup)
     -   [Add repository to Config](#add-repository-to-config)
     -   [Clone repository](#clone-repository)
--   [Readme.md](#readme)
+-   [Structure](#structure)
+    -   [Readme.md](#readme)
+    -   [Table of Contents](#toc)
 -   [Configuration](#configuration)
     -   [Versions](#versions)
     -   [Private repositories](#private-repositories)
@@ -58,9 +60,13 @@ Once you have configured the repository, you must clone it using
 php artisan docdress:clone `my/repo`
 ```
 
+<a name="structure"></a>
+
+## Structure
+
 <a name="readme"></a>
 
-## Readme.md
+### Readme.md
 
 The index is built as a nested list in the `readme.md`. It is located under
 `## Index`. So your `readme.md` could look like this:
@@ -77,6 +83,22 @@ Hello World.
     -   [Installation](/installation.md)
 -   ## Foo
     -   [Bar](subfolder/bar.md)
+```
+
+<a name="toc"></a>
+
+## Table of Contents
+
+The table of contents is built from all `##` and `###` headings under the `#`
+heading. No link tag with a `name`attribute is needed. You can easily build your
+markdown file as follows:
+
+```markdown
+# Title
+
+## Introduction
+
+...
 ```
 
 <a name="configuration"></a>
