@@ -61,6 +61,32 @@ php artisan docdress:clone `my/repo`
 
 ## Configuration
 
+With **Docdress** any number of repositories can be documented in a laravel
+project. Each repository is configured in `docdress.repos` like so:
+
+```php
+'repos' => [
+    'my/repo' => [
+        // ...
+    ],
+],
+```
+
+The following attributes can be configured for a repository:
+
+-   `route_prefix` - The route prefix under which the documentation is
+    accessible.
+-   `default_page` - The default page
+-   `versions` - An array containing the branches that should be available in
+    the documentation.
+-   `default_version` - The current version.
+-   `subfolder` - The subfolder of the documentation.
+-   `access_token` - Personal access token for private repositories.
+-   `webhook_token` - Webhook token to allow pulling the repository after a
+    change.
+
+Some of the attributes are discussed in more detail below:
+
 <a name="versions"></a>
 
 ### Versions
