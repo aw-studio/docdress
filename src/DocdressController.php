@@ -107,6 +107,8 @@ class DocdressController
             'versions'       => config("docdress.repos.{$repo}.versions"),
             'currentVersion' => $version,
             'theme'          => $theme,
+            'config'         => (object) config("docdress.repos.{$repo}"),
+            'repo'           => $repo,
         ]);
     }
 

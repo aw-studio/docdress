@@ -7,7 +7,7 @@
             
             <aside class="sidebar sticky overflow-visible top-0 pt-12">
                 <div class="logo">
-                    <a href="/" class="text-3xl text-black no-underline">Fjuse</a>
+                    <a href="/" class="text-3xl text-black no-underline">Docs</a>
                 </div>
                 
                 <nav class="absolute overflow-y-scroll bottom-0 left-0 right-0 py-6" style="top:6rem;">
@@ -22,8 +22,12 @@
                     <div class="w-3/4">
                         @include('docdress::search')
                     </div>
-                    <div class="w-1/4 pl-4">
+                    <div class="w-1/4 pl-4 flex">
                         @include('docdress::version')
+
+                        <a class="leading-10 pt-2 px-4 text-black" href="https://github.com/{{ $repo }}" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
                     </div>
                 </header>
 
