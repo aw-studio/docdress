@@ -35,6 +35,12 @@ Install **Docdress** via composer:
 composer require aw-studio/docdress
 ```
 
+Now publish the required assets and the config:
+
+```shell
+php artisan vendor:publish --provider="Docdress\DocdressServiceProvider"
+```
+
 <a name="add-repository-to-config"></a>
 
 ### Add repository to Config
