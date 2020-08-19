@@ -79,8 +79,8 @@ Hello World.
 ## Index
 
 -   ## Getting Started
-    -   [Introduction](/introduction.md)
-    -   [Installation](/installation.md)
+    -   [Introduction](introduction.md)
+    -   [Installation](installation.md)
 -   ## Foo
     -   [Bar](subfolder/bar.md)
 ```
@@ -217,3 +217,36 @@ And the `token` from your config must be specified.
 
 ],
 ```
+
+## Alerts
+
+You may display alerts just like custom-blocks in vuepress. The available alert
+types are `tip`, `warning`, `danger`
+
+```markdown
+::: tip
+
+Hello World!
+
+:::
+```
+
+```markdown
+::: warning
+
+Hello World!
+
+:::
+```
+
+```markdown
+::: danger
+
+Hello World!
+
+:::
+```
+
+![alert-tip](alert-tip.png 'Alert Tip')
+![alert-warning](alert-warning.png 'Alert Warning')
+![alert-danger](alert-danger.png 'Alert Danger')
