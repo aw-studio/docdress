@@ -13,13 +13,14 @@ Laravel project.
     -   [Clone repository](#clone-repository)
 -   [Configuration](#configuration)
     -   [Versions](#versions)
+    -   [Private repositories](#private-repositories)
     -   [Webhook](#webhook)
 
-<a name="introduction">
+<a name="introduction"></a>
 
 ## Introduction
 
-<a name="setup">
+<a name="setup"></a>
 
 ## Setup
 
@@ -29,7 +30,7 @@ Install **Docdress** via composer:
 composer require aw-studio/docdress
 ```
 
-<a name="add-repository-to-config">
+<a name="add-repository-to-config"></a>
 
 ### Add repository to Config
 
@@ -45,7 +46,7 @@ Add the desired repository to the `docdress` config.
 ],
 ```
 
-<a name="clone-repository">
+<a name="clone-repository"></a>
 
 ### Clone repository
 
@@ -56,11 +57,11 @@ Once you have configured the repository, you must clone it using
 php artisan docdress:clone `my/repo`
 ```
 
-<a name="configuration">
+<a name="configuration"></a>
 
 ## Configuration
 
-<a name="versions">
+<a name="versions"></a>
 
 ### Versions
 
@@ -72,7 +73,6 @@ default branch. The versions are specified as branch name and title, like so:
 
     'my/repo' => [
         // ...
-
         'default_version' => 'master',
         'versions'        => [
             'master' => 'Master',
@@ -83,7 +83,26 @@ default branch. The versions are specified as branch name and title, like so:
 ],
 ```
 
-<a name="subfolder">
+<a name="private-repositories"></a>
+
+### Private repositories
+
+Private repositories require a
+[personal access token](https://github.com/settings/tokens) with the read
+permissions for the repository.
+
+```php
+'repos' => [
+
+    'my/repo' => [
+        // ...
+        'access_token' => env('GITHUB_ACCESS_TOKEN', null)
+    ],
+
+],
+```
+
+<a name="subfolder"></a>
 
 ### Subfolder
 
@@ -96,14 +115,13 @@ folder is cloned and displayed.
 
     'my/repo' => [
         // ...
-
         'subfolder' => 'docs'
     ],
 
 ],
 ```
 
-<a name="webhook">
+<a name="webhook"></a>
 
 ### Webhook
 
