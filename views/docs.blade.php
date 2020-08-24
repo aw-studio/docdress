@@ -7,7 +7,7 @@
             
             <aside class="sidebar sticky overflow-visible top-0 pt-12">
                 <div class="logo">
-                    <a href="/" class="text-3xl text-black no-underline">Docs</a>
+                    <a href="/{{ $config->route_prefix }}" class="text-3xl text-black no-underline" data-turbolinks="false">Docs</a>
                 </div>
                 
                 <nav class="absolute overflow-y-scroll bottom-0 left-0 right-0 py-6" style="top:6rem;">

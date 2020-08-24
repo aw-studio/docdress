@@ -57,23 +57,24 @@ class Documentor
      */
     public function index($repo, $version, $subfolder = null)
     {
-        $content = Str::after($this->parser->parse(
+        return $this->cache->remember("docs.index.{$repo}.{$version}", 5, function () use ($repo, $version) {
+            $content = Str::after($this->parser->parse(
+                $this->files->get($this->path($repo, $version, 'readme')),
+                [
 
-            $this->files->get($this->path($repo, $version, 'readme')),
-            [
+                ]
+            ), '<h2>Index</h2>');
 
-            ]
-        ), '<h2>Index</h2>');
+            preg_match_all('/(?<=\bhref=")[^"]*/', $content, $matches);
 
-        preg_match_all('/(?<=\bhref=")[^"]*/', $content, $matches);
+            foreach ($matches[0] as $match) {
+                $page = str_replace('.md', '', $match);
+                $link = preg_replace('#/+#', '/', '/'.$this->routePrefix($repo)."/{$version}/$page");
+                $content = str_replace($match, $link, $content);
+            }
 
-        foreach ($matches[0] as $match) {
-            $page = str_replace('.md', '', $match);
-            $link = preg_replace('#/+#', '/', '/'.$this->routePrefix($repo)."/{$version}/$page");
-            $content = str_replace($match, $link, $content);
-        }
-
-        return $content;
+            return $content;
+        });
     }
 
     /**
