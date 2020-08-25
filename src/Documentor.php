@@ -6,6 +6,7 @@ use Docdress\Parser\AlertParser;
 use Docdress\Parser\CodeParser;
 use Docdress\Parser\LinkNameParser;
 use Docdress\Parser\LinkParser;
+use Docdress\Parser\SrcParser;
 use Docdress\Parser\TocParser;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Filesystem\Filesystem;
@@ -123,6 +124,7 @@ class Documentor
                 TocParser::class,
                 AlertParser::class,
                 CodeParser::class,
+                SrcParser::class,
                 LinkParser::class,
                 LinkNameParser::class,
             ];

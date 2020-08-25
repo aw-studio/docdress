@@ -31,7 +31,7 @@ trait ManagesScreens
                 continue;
             }
 
-            $publicDir = public_path(config("docdress.repos.{$repo}.route_prefix").'/'.$version.str_replace($path, '', $file));
+            $publicDir = storage_path('app/public/'.config("docdress.repos.{$repo}.route_prefix").'/'.$version.str_replace($path, '', $file));
 
             File::ensureDirectoryExists($publicDir);
             File::copyDirectory($file, $publicDir);
