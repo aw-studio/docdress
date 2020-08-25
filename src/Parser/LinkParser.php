@@ -22,15 +22,11 @@ class LinkParser implements HtmlParserInterface
             }
 
             if (array_key_exists('host', parse_url($link))) {
-                $replace = $link;
-
-                if (config('docdress.open_external_links_in_new_tab')) {
-                    $replace .= '" target="_blank';
-                }
+                $replace = "{$link}\" target=\"_blank";
             } else {
                 $replace = route(request()->route()->getName(), [
                     'version' => request()->route('version'),
-                    'page'    => ltrim(preg_replace('#/+#', '/', $link), '/'),
+                    'page'    => $this->parseInternalLink($link),
                 ]);
 
                 $replace .= '" data-turbolinks-action="replace';
@@ -40,6 +36,25 @@ class LinkParser implements HtmlParserInterface
         }
 
         return $text;
+    }
+
+    /**
+     * Parse internal link.
+     *
+     * @param  string $link
+     * @return string
+     */
+    protected function parseInternalLink($link)
+    {
+        $url = ltrim(preg_replace('#/+#', '/', $link), '/');
+
+        if (! is_null(request()->route('sub_page')) && ! Str::contains($url, '/')) {
+            $url = request()->route('page').'/'.$url;
+        }
+
+        $url = str_replace(['.md', '../'], '', $url);
+
+        return $url;
     }
 
     /**
