@@ -100,14 +100,16 @@ class DocdressController
 
         $title = (new Crawler($content))->filterXPath('//h1');
 
+        $config = config("docdress.repos.{$repo}");
+
         return view('docdress::docs', [
             'index'          => $index,
-            'title'          => $title,
+            'title'          => count($title) ? $title->text() : null,
             'content'        => $content,
             'versions'       => config("docdress.repos.{$repo}.versions"),
             'currentVersion' => $version,
             'theme'          => $theme,
-            'config'         => (object) config("docdress.repos.{$repo}"),
+            'config'         => (object) $config,
             'repo'           => $repo,
         ]);
     }
