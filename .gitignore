@@ -3,3 +3,4 @@
 composer.lock
 package-lock.json
 yarn.lock
+.phpunit.result.cache
