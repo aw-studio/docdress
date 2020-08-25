@@ -30,7 +30,7 @@ class LinkParser implements HtmlParserInterface
             } else {
                 $replace = route(request()->route()->getName(), [
                     'version' => request()->route('version'),
-                    'page'    => preg_replace('#/+#', '/', $link),
+                    'page'    => ltrim(preg_replace('#/+#', '/', $link), '/'),
                 ]);
 
                 $replace .= '" data-turbolinks-action="replace';
