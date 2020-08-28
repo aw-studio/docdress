@@ -12,7 +12,7 @@ var templates = {
 	footer: Hogan.compile($('#search_footer_template').html()),
 };
 
-var $searchInput = $('input[name="search"]');
+var $searchInput = $('#dd-search');
 var $article = $('#docs .content');
 
 // Closes algolia results on blur

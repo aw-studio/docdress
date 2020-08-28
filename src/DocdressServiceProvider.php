@@ -5,6 +5,7 @@ namespace Docdress;
 use Docdress\Commands\CloneCommand;
 use Docdress\Commands\StatusCommand;
 use Docdress\Commands\UpdateCommand;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class DocdressServiceProvider extends ServiceProvider
@@ -16,6 +17,8 @@ class DocdressServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Blade::component('dd-search-input', SearchInputComponent::class);
+
         $this->commands([
             CloneCommand::class,
             UpdateCommand::class,
