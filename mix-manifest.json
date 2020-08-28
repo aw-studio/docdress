@@ -1,4 +1,5 @@
 {
     "/publish/public/js/app.js": "/publish/public/js/app.js",
-    "/publish/public/css/app.css": "/publish/public/css/app.css"
+    "/publish/public/css/app.css": "/publish/public/css/app.css",
+    "/publish/public/js/search.js": "/publish/public/js/search.js"
 }

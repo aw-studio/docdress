@@ -1,0 +1,20 @@
+/*!
+         * @overview es6-promise - a tiny implementation of Promises/A+.
+         * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+         * @license   Licensed under MIT license
+         *            See https://raw.githubusercontent.com/jakearchibald/es6-promise/master/LICENSE
+         * @version   2.3.0
+         */
+
+/*!
+ * typeahead.js 0.10.5
+ * https://github.com/twitter/typeahead.js
+ * Copyright 2013-2014 Twitter, Inc. and other contributors; Licensed MIT
+ */
+
+/*! algoliasearch 3.7.7 | © 2014, 2015 Algolia SAS | github.com/algolia/algoliasearch-client-js */
+
+/**
+ * @preserve Copyright 2012 Twitter, Inc.
+ * @license http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
