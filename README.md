@@ -21,6 +21,7 @@ Laravel project.
     -   [Algolia](#algolia)
 -   [Authorization](#authorization)
 -   [Alerts](#alerts)
+-   [Search Component](#search-component)
 
 <a name="introduction"></a>
 
@@ -314,3 +315,15 @@ Hello World!
 ![alert-tip](alert-tip.png 'Alert Tip')
 ![alert-warning](alert-warning.png 'Alert Warning')
 ![alert-danger](alert-danger.png 'Alert Danger')
+
+<a name="search-component">
+
+## Search Component
+
+By using the `x-dd-search-input` component. You can place the algolia search
+input in your blade views. The component needs the `repo` that should be
+searched and the desired version.
+
+```html
+<x-dd-search-input repo="my/repo" version="1.0" />
+```
