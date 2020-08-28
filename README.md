@@ -18,6 +18,7 @@ Laravel project.
     -   [Versions](#versions)
     -   [Private repositories](#private-repositories)
     -   [Webhook](#webhook)
+    -   [Algolia](#algolia)
 -   [Authorization](#authorization)
 -   [Alerts](#alerts)
 
@@ -234,6 +235,26 @@ And the `token` from your config must be specified.
         // ...
 
         'webhook_token' => env('GITHUB_WEBHOOK_TOKEN', null),
+    ],
+
+],
+```
+
+<a name="algolia"></a>
+
+### Algolia
+
+[Algolia Docsearch](https://docsearch.algolia.com/) can be used for the search
+of your documenation. All you have to do is to specify your **application key**
+for the respective repository.
+
+```php
+'repos' => [
+
+    'my/repo' => [
+        // ...
+
+        'algolia_app_key' => env('ALGOLIA_APP_KEY', null),
     ],
 
 ],

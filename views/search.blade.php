@@ -5,56 +5,45 @@
             <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
         </svg>
     </button>
-
-    <div class="dd-search-results absolute rounded-lg border-gray-400 border left-0 right-0" style="display:none;">
-        <div class="dd-search-result border-gray-400">
-            <h5 class="dd-search-result__title">Input</h5>
-            <div class="dd-search-result__subtitle color-gray-900">
-                Introduction > lol
-            </div>
-            <div class="dd-search-result__text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam excepturi possimus distinctio consectetur quisquam unde reiciendis perspiciatis. Maiores, inventore, nemo dolorum ex doloribus eligendi, magnam pariatur ullam ipsa hic itaque?
-            </div>
-        </div>
-
-        <div class="dd-search-result border-gray-400">
-            <h5 class="dd-search-result__title">Input</h5>
-            <div class="dd-search-result__subtitle color-gray-900">
-                abc > lol
-            </div>
-            <div class="dd-search-result__text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam excepturi possimus distinctio consectetur quisquam unde reiciendis perspiciatis. Maiores, inventore, nemo dolorum ex doloribus eligendi, magnam pariatur ullam ipsa hic itaque?
-            </div>
-        </div>
-    </div>
 </div>
 
-<x-script>
-
-</x-script>
-
 <x-style lang="scss">
-.dd-search{
-    .dd-search-results {
-        top: calc(100% + 0.5rem);
-        z-index:1;
-        background: #f6f8fb;
-    }
+.twitter-typeahead{
+    width: 100%;
+    position: relative;
+}
+.tt-dropdown-menu {
+    width: 100%;
+    top: calc(100% + 0.5rem) !important;
+    z-index:1;
+    background: #f6f8fb;
+    width: 100%;
+    position: absolute;
+    border-radius: .5rem;
+    border: 1px solid #cbd5e0;
+    left: 0;
+    right: 0;
 
+    .tt-suggestion {
+        &:first-child .dd-search-result {
+            border-top-left-radius: .5rem;
+            border-top-right-radius: .5rem;
+        }
+        &:last-child .dd-search-result{
+            border-bottom: none !important;
+        }
+    } 
     .dd-search-result{
         padding: 1rem 1.5rem;
-        border-bottom-width: 1px;
+        border-bottom: 1px solid #cbd5e0 !important;
         cursor:pointer;
 
         &:hover{
             background: #edf3fc;
         }
 
-        &:last-child{
-            border-bottom-width: 0;
-        }
-
         &__title {
+            font-weight: 600;
             margin-bottom: 0.125rem;
             color: #000000cc;
         }
@@ -71,8 +60,30 @@
                 opacity: .6;
             }
         }
+        &__title em, &__subtitle em {
+            font-style: normal;
+            position: relative;
+            &:before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                background-color: var(--primary);
+                opacity: 0.15;
+                
+            }
+        }
         &__text{
             font-size: 14px;
+            background: #fdfeff;
+            padding: .25rem;
+            border-radius: 4px;
+
+            em{
+                font-style: normal;
+                font-weight: bold;
+            }
         }
     }
 }
