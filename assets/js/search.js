@@ -13,7 +13,7 @@ var templates = {
 };
 
 var $searchInput = $('input[name="search"]');
-var $article = $('.docs_main');
+var $article = $('#docs .content');
 
 // Closes algolia results on blur
 $searchInput.blur(function() {
@@ -59,14 +59,28 @@ typeahead.on('typeahead:selected', function changePage(e, item) {
 	window.location.href = item.url.replace(/^.*\/\/[^\/]+/, '');
 });
 
+typeahead.on('keyup', function(e) {
+	old_input = $(this).typeahead('val');
+
+	if ($(this).val() === '' && old_input.length == $(this).typeahead('val')) {
+		$article.css('opacity', '1');
+		$searchInput.closest('#search-wrapper').removeClass('not-empty');
+	} else {
+		$article.css('opacity', '0.1');
+		$searchInput.closest('#search-wrapper').addClass('not-empty');
+	}
+	if (e.keyCode === 27) {
+		$article.css('opacity', '1');
+	}
+});
+
+typeahead.on('typeahead:closed', function() {
+	$article.css('opacity', '1');
+});
+
 typeahead.on('typeahead:closed', function(e) {
 	// keep menu open if input element is still focused
 	if ($(e.target).is(':focus')) {
 		return false;
 	}
-});
-
-$('#cross').click(function() {
-	typeahead.typeahead('val', '').keyup();
-	$article.css('opacity', '1');
 });
