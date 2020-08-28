@@ -25,7 +25,6 @@ ready(function() {
 
     let firstList = true
     document.querySelectorAll('.content > ul').forEach(function(node) {
-        console.log(node, firstList)
         if(firstList) {
             return (firstList = false);
         }
