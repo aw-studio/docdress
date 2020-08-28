@@ -1,4 +1,18 @@
+
+@include('docdress::algolia_template')
+
 <input id="dd-search" class="{{ $class }}" type="text" name="search" placeholder="Search Docs">
+
+<script>
+window.version = "{{ $version }}";
+@isset($config->algolia_app_key)
+window.algolia = {!! json_encode([
+    'app_key' => $config->algolia_app_key,
+    'app_id' => $config->algolia_app_id ?? 'BH4D9OD16A'
+]) !!};
+@endisset
+</script>
+<script src="/docdress/js/search.js"></script>
 
 <x-style lang="scss">
 .twitter-typeahead{

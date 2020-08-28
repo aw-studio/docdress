@@ -1,6 +1,6 @@
 <?php
 
-namespace Docdress;
+namespace Docdress\Components;
 
 use Illuminate\View\Component;
 
@@ -14,13 +14,29 @@ class SearchInputComponent extends Component
     public $class = '';
 
     /**
+     * Version.
+     *
+     * @var string
+     */
+    public $version = 'master';
+
+    /**
+     * Repository config.
+     *
+     * @var object|null
+     */
+    public $config;
+
+    /**
      * Create new SearchInputComponent instance.
      *
      * @param  string $class
      * @return void
      */
-    public function __construct($class)
+    public function __construct($repo, $version = 'master', $class = '')
     {
+        $this->config = (object) config("docdress.repos.{$repo}");
+        $this->version = $version;
         $this->class = $class;
     }
 
@@ -31,6 +47,6 @@ class SearchInputComponent extends Component
      */
     public function render()
     {
-        return view('docdress::search_input');
+        return view('docdress::components.search_input');
     }
 }

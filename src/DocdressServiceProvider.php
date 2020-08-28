@@ -5,6 +5,7 @@ namespace Docdress;
 use Docdress\Commands\CloneCommand;
 use Docdress\Commands\StatusCommand;
 use Docdress\Commands\UpdateCommand;
+use Docdress\Components\SearchInputComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 

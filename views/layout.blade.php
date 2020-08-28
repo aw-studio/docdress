@@ -24,22 +24,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
     <script src="/docdress/js/app.js"></script>
 
-    <script>
-    window.version = "{{ $currentVersion }}";
-    @isset($config->algolia_app_key)
-    window.algolia = {!! json_encode([
-        'app_key' => $config->algolia_app_key,
-        'app_id' => $config->algolia_app_id ?? 'BH4D9OD16A'
-    ]) !!};
-    @endisset
-    </script>
-
 </head>
 <body>
     
     @yield('content')
-
-    @include('docdress::algolia_template')
 
     <x-script>
         function ready(f){/in/.test(document.readyState)?setTimeout('ready('+f+')',9):f()}
