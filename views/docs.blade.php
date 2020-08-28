@@ -49,31 +49,68 @@
             }
             document.querySelector('a[name="'+section+'"]').scrollIntoView(true)
         });
-        function isElementInViewport (el) {
+        function isElementAboveScreen(el) {
             //special bonus for those using jQuery
             if (typeof jQuery === "function" && el instanceof jQuery) {
                 el = el[0];
             }
-            var rect = el.getBoundingClientRect();
-            return (rect.top >= 0 
-                && rect.left >= 0 
-                && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) 
-                && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
+            let rect = el.getBoundingClientRect();
+
+            return rect.top < 25;
         };
-        window.addEventListener('scroll', function(e) {
+        function updateHash() {
             let elements = []
+            let hash = null;
             document.querySelectorAll('.content h2').forEach(function(el) {elements.push(el)});
-            elements.reverse().forEach(function(el) {
-                if(!isElementInViewport(el)) {
+            elements.forEach(function(el) {
+                
+                if(!isElementAboveScreen(el)) {
                     return;
                 }
+                
                 if (!window.history.pushState) {
                     return;    
                 }
-                let hash = "#" + el.id;
-                window.history.pushState(null, null, hash);
+                hash = el.id;
+
+                console.log(hash)
+                
             });
+
+            if(hash !== null) {
+                window.history.pushState(null, null, '#'+hash);
+            } else {
+                removeHash()
+            }
+        }
+        function removeHash () { 
+            var scrollV, scrollH, loc = window.location;
+            if ("pushState" in history)
+                history.pushState("", document.title, loc.pathname + loc.search);
+            else {
+                // Prevent scrolling by storing the page's current scroll offset
+                scrollV = document.body.scrollTop;
+                scrollH = document.body.scrollLeft;
+        
+                loc.hash = "";
+        
+                // Restore the scroll offset, should be flicker free
+                document.body.scrollTop = scrollV;
+                document.body.scrollLeft = scrollH;
+            }
+        }
+        var isScrolling;
+        window.addEventListener('scroll', function(e) {
+            // Clear our timeout throughout the scroll
+	        window.clearTimeout( isScrolling );
+
+            // Set a timeout to run after scrolling ends
+            isScrolling = setTimeout(function() {
+
+                updateHash()
+                
+
+            }, 100);
         });
     </x-script>
 @stop
