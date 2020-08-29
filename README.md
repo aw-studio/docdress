@@ -22,6 +22,7 @@ Laravel project.
 -   [Authorization](#authorization)
 -   [Alerts](#alerts)
 -   [Search Component](#search-component)
+-   [Testing](#testing)
 
 <a name="introduction"></a>
 
@@ -326,4 +327,14 @@ searched and the desired version.
 
 ```html
 <x-dd-search-input repo="my/repo" version="1.0" />
+```
+
+<a name="testing">
+
+## Testing
+
+Execute tests via composer:
+
+```shell
+composer test
 ```

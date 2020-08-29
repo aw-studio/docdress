@@ -14,12 +14,15 @@ ready(function() {
 
     document.querySelectorAll('aside.sidebar h2').forEach(function(heading) {
         heading.addEventListener('click', function(event) {
+            let current = document.querySelector('aside.sidebar ul ul.expanded');
+            
             document.querySelectorAll('aside.sidebar ul ul').forEach(function(h) {
-                h.classList.remove('expanded')
-                // h.style['max-height'] = 0
+                h.classList.remove('expanded')    
             });
             let el = this.parentNode.querySelector('ul');
-            el.classList.add('expanded');
+            if(current != el) {
+                el.classList.add('expanded');
+            }
         });
     });
 

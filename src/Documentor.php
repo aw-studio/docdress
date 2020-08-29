@@ -4,6 +4,7 @@ namespace Docdress;
 
 use Docdress\Parser\AlertParser;
 use Docdress\Parser\CodeParser;
+use Docdress\Parser\CodePathParser;
 use Docdress\Parser\LinkNameParser;
 use Docdress\Parser\LinkParser;
 use Docdress\Parser\SrcParser;
@@ -123,6 +124,7 @@ class Documentor
             $parser = [
                 TocParser::class,
                 AlertParser::class,
+                CodePathParser::class,
                 CodeParser::class,
                 SrcParser::class,
                 LinkParser::class,

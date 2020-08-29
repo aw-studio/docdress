@@ -70,6 +70,7 @@ return [
             'code-variable'      => '#588bbd',
             'code-string'        => '#169f0c',
             'code-default-color' => '#090910',
+            'code-punctuation'   => '#055472',
 
             'algolia-icon-color' => '#090910',
         ],

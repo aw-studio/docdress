@@ -24,11 +24,12 @@ class TocParser implements MarkdownParserInterface
             $replace = "<a name=\"{$slug}\"></a>\n"
                 .str_replace(
                     $heading,
-                    '<a href="#'.$slug.'">'.$heading."</a>\n",
+                    ' <a href="#'.$slug.'">'.ltrim($heading, ' ')."</a>\n",
                     $headings[0][$key]
                 );
+            $match = $headings[0][$key]."\n";
 
-            $markup = str_replace($headings[0][$key]."\n", $replace, $markup);
+            $markup = str_replace($match, $replace, $markup);
 
             $link = '['.trim($heading)."](#{$slug})";
 
@@ -39,7 +40,14 @@ class TocParser implements MarkdownParserInterface
             }
         }
 
-        return preg_replace('/(?m)^#{1}(?!#)(.*)/', "$0\n\n".implode("\n", $toc), $markup);
+        if (empty($toc)) {
+            return $markup;
+        }
+
+        // Place table of contents below first header.
+        return preg_replace(
+            '/(?m)^#{1}(?!#)(.*)/', "$0\n\n".implode("\n", $toc), $markup, 1
+        );
     }
 
     /**

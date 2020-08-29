@@ -8,7 +8,7 @@ https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javasc
 
 code[class*='language-'],
 pre[class*='language-'] {
-	color: var(--primary);
+	color: var(--code-default-color);
 	background: none;
 	text-align: left;
 	white-space: pre;
@@ -74,7 +74,7 @@ pre[class*='language-'] {
 }
 
 .token.punctuation {
-	color: var(--code-default-color);
+	color: var(--code-punctuation);
 }
 
 .namespace {

@@ -51,10 +51,10 @@ div.layout-docs {
 			max-height: 0;
 			overflow: hidden;
 			margin-top: 0.5rem;
-			transition: max-height 0.45s ease;
 
 			&.expanded {
-				max-height: none;
+				transition: max-height 0.5s ease;
+				max-height: 999px;
 			}
 		}
 

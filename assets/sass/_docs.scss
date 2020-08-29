@@ -42,16 +42,6 @@ div#docs .content {
 		}
 	}
 
-	h2 .a:before {
-		content: '#';
-		font-weight: 400;
-		margin-left: -25px;
-		position: absolute;
-		font-size: 28px;
-		color: var(--primary);
-		opacity: 0.6;
-	}
-
 	ul li {
 		position: relative;
 	}
@@ -77,8 +67,13 @@ div#docs .content {
 		margin-left: -25px;
 		position: absolute;
 		font-size: 28px;
+		margin-top: 1px;
 		color: var(--primary);
 		opacity: 0.6;
+	}
+	h3 a:before {
+		font-size: 25px;
+		margin-top: 0;
 	}
 
 	h1,
@@ -112,6 +107,20 @@ div#docs .content {
 
 		th {
 			font-size: 16px;
+		}
+	}
+
+	pre[class*='language-'] {
+		position: relative;
+
+		code[dd-path]::before {
+			position: absolute;
+			right: 1rem;
+			font-size: 13px;
+			top: 0.5rem;
+			color: var(--code-default-colo);
+			content: attr(dd-path);
+			opacity: 0.5;
 		}
 	}
 
