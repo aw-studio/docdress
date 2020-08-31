@@ -21,21 +21,46 @@ class LinkParser implements HtmlParserInterface
                 continue;
             }
 
-            if (array_key_exists('host', parse_url($link))) {
-                $replace = "{$link}\" target=\"_blank";
-            } else {
-                $replace = route(request()->route()->getName(), [
-                    'version' => request()->route('version'),
-                    'page'    => $this->parseInternalLink($link),
-                ]);
-
-                $replace .= '" data-turbolinks-action="replace';
-            }
-
-            $text = str_replace($link, $replace, $text);
+            $text = str_replace($link, $this->modifyLink($link), $text);
         }
 
         return $text;
+    }
+
+    /**
+     * Get modified link.
+     *
+     * @param  string $link
+     * @return string
+     */
+    protected function modifyLink($link)
+    {
+        if (array_key_exists('host', parse_url($link))) {
+            if (! $this->isExternal($link)) {
+                return $link;
+            }
+
+            return  "{$link}\" target=\"_blank";
+        }
+        $modified = route(request()->route()->getName(), [
+            'version' => request()->route('version'),
+            'page'    => $this->parseInternalLink($link),
+        ]);
+
+        $modified .= '" data-turbolinks-action="replace';
+
+        return $modified;
+    }
+
+    /**
+     * Determines if link is external.
+     *
+     * @param  string $link
+     * @return bool
+     */
+    protected function isExternal($link)
+    {
+        return parse_url(url(''))['host'] != parse_url($link)['host'];
     }
 
     /**
