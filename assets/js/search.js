@@ -38,6 +38,7 @@ $(document).ready(function() {
 					facetFilters: ['version' + window.version],
 					highlightPreTag: '<em>',
 					highlightPostTag: '</em>',
+					clickAnalytics: true,
 				},
 				function searchCallback(err, content) {
 					if (err) {
