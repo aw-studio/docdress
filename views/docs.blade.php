@@ -18,25 +18,15 @@
             </aside>
 
             <section class="p-24 pt-12 flex-1">
-                <header class="block lg:flex pb-12">
+                <header class="flex pb-12">
+                    
                     <div class="
-                        flex w-full 
-                        md:hidden
-                    ">
-                        @include('docdress::version')
-                        <a class="leading-10 pt-2 px-4 text-black" href="https://github.com/{{ $repo }}" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                    <div class="
-                        w-full 
-                        md:w-3/4
+                        w-3/4
                     ">
                         @include('docdress::search')
                     </div>
                     <div class="
-                        hidden w-1/4 pl-4 
-                        md:flex
+                        hidden w-1/4 pl-4 flex
                     ">
                         @include('docdress::version')
                         <a class="leading-10 pt-2 px-4 text-black" href="https://github.com/{{ $repo }}" target="_blank">

@@ -43,7 +43,7 @@ class LinkParser implements HtmlParserInterface
             return  "{$link}\" target=\"_blank";
         }
         $modified = route(request()->route()->getName(), [
-            'version' => request()->route('version'),
+            'version' => request()->route('version') ?: 'master',
             'page'    => $this->parseInternalLink($link),
         ]);
 
