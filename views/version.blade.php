@@ -1,7 +1,7 @@
 <div class="inline-block relative w-full pt-2 dd-version-select">
-    <select onchange="changeVersion()" id="version" class="rounded-lg block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 h-10 pr-8 leading-tight focus:outline-none">
+    <select id="dd-version" onchange="changeVersion(this.value)" class="rounded-lg block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 h-10 pr-8 leading-tight focus:outline-none">
         @foreach($versions as $version => $title)
-        <option value="{{ $version }}" @if($currentVersion == $version)selected="selected"@endif>
+        <option value="{{ $version }}" {{ $currentVersion == $version ? 'selected="selected"' : '' }}>
             {{ $title }}
         </option>
         @endforeach
@@ -16,8 +16,7 @@ currentVersion = "{{ $currentVersion }}";
 </script>
 
 <x-script>
-    function changeVersion() {
-        var version = document.getElementById("version").value;
+    function changeVersion(version) {
         Turbolinks.visit(window.location.pathname.replace(currentVersion, version), {action:'replace'})
     }
 </x-script>

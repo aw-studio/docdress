@@ -18,6 +18,8 @@ class LinkParser implements HtmlParserInterface
 
         foreach ($matches[0] as $link) {
             if (Str::startsWith($link, '#')) {
+                $text = Str::replaceFirst($link, $link.'" data-turbolinks="false', $text);
+
                 continue;
             }
 

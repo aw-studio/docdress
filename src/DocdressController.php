@@ -81,12 +81,15 @@ class DocdressController
             $this->authorize("docdress.{$repo}");
         }
 
-        if (! $this->isValidVersion($repo, $version)) {
-            return redirect(route("docdress.docs.{$repo}", ['version' => config("docdress.repos.{$repo}.default_version")]));
-        }
-
         if (! $page) {
             $page = config("docdress.repos.{$repo}.default_page");
+        }
+
+        if (! $this->isValidVersion($repo, $version)) {
+            return redirect(route("docdress.docs.{$repo}", [
+                'version' => config("docdress.repos.{$repo}.default_version"),
+                'page'    => $version.($page ? "/$page" : null),
+            ]));
         }
 
         if ($subPage) {
