@@ -82,7 +82,7 @@
             });
 
             if(hash !== null) {
-                window.history.pushState(null, null, '#'+hash);
+                window.history.replaceState({}, document.title, '#'+hash);
             } else {
                 removeHash()
             }
