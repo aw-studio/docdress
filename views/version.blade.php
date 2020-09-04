@@ -11,14 +11,6 @@
     </div>
 </div>
 
-<select >
-    <option value="1" selected="selected">
-        1
-    </option>
-    <option value="2">
-        2
-    </option>
-</select>
 <script>
 currentVersion = "{{ $currentVersion }}";
 </script>
