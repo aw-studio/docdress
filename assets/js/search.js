@@ -35,7 +35,7 @@ $(document).ready(function() {
 				query,
 				{
 					hitsPerPage: 5,
-					facetFilters: ['version' + window.version],
+					facetFilters: ['version:' + window.version],
 					highlightPreTag: '<em>',
 					highlightPostTag: '</em>',
 					clickAnalytics: true,
