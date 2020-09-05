@@ -45,6 +45,22 @@ class LinkParserTest extends TestCase
         $this->assertStringContainsString('href="http://test/1.0/foo/bar"', $result);
     }
 
+    /** @test */
+    public function it_sets_data_turbo_link_to_false_for_same_page_anchor_links()
+    {
+        $result = (new LinkParser)->parse('<a href="#foo">foo</a>');
+
+        $this->assertSame('<a href="#foo" data-turbolinks="false">foo</a>', $result);
+    }
+
+    /** @test */
+    public function parsed_anchor_link_wont_not_effect_anchor_text()
+    {
+        $result = (new LinkParser)->parse('<a href="#foo">foo</a> #foo');
+
+        $this->assertSame('<a href="#foo" data-turbolinks="false">foo</a> #foo', $result);
+    }
+
     public function getRoute($page = 'introduction', $subPage = null)
     {
         $route = m::mock('route');
