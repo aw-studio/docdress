@@ -87,9 +87,14 @@ div#docs .content {
 		}
 	}
 
-	img {
+	img,
+	iframe {
 		box-shadow: 0 0 19px 0 rgba(235, 235, 235, 0.7);
 		border-radius: 0.5rem;
+	}
+
+	iframe {
+		margin-bottom: 1rem;
 	}
 
 	table {
