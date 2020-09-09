@@ -115,6 +115,7 @@ class DocdressController
             'config'         => (object) $config,
             'repo'           => $repo,
             'blob'           => "https://github.com/{$repo}/blob/{$version}/{$page}.md",
+            'edit'           => "https://github.com/{$repo}/edit/{$version}/{$page}.md",
         ]);
     }
 
