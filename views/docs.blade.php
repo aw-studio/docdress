@@ -29,7 +29,7 @@
                         w-1/4 pl-4 flex
                     ">
                         @include('docdress::version')
-                        <a class="leading-10 pt-2 px-4 text-black" href="https://github.com/{{ $repo }}" target="_blank">
+                        <a class="leading-10 pt-2 px-4 text-black" href="{{ $blob ?? "https://github.com/{$repo}" }}" target="_blank">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
