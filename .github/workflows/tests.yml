@@ -14,10 +14,13 @@ jobs:
             fail-fast: true
             matrix:
                 php: [7.4]
-                laravel: [7.*]
+                laravel: [7.*, 8.*]
                 stability: [prefer-lowest, prefer-stable]
                 include:
                     - laravel: 7.*
+                      orchestra: 5.*
+                    - laravel: 8.*
+                      orchestra: 6.*
 
         name:
             p ${{ matrix.php }} - l ${{ matrix.laravel }} - ${{ matrix.stability
@@ -46,7 +49,7 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+                  composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.orchestra }}" --no-interaction --no-update
                   composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
             - name: Run PHP tests via PHPUnit

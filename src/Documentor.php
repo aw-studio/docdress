@@ -72,7 +72,7 @@ class Documentor
             foreach ($matches[0] as $match) {
                 $page = str_replace('.md', '', $match);
                 $link = preg_replace('#/+#', '/', '/'.$this->routePrefix($repo)."/{$version}/$page");
-                $content = str_replace($match, $link, $content);
+                $content = str_replace('href="'.$match, 'href="'.$link, $content);
             }
 
             return $content;
