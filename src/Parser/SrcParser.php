@@ -26,7 +26,7 @@ class SrcParser implements HtmlParserInterface
             } else {
                 $path = explode('/', request()->getPathInfo());
                 array_pop($path);
-                $replace = '/storage'.implode('/', $path).'/'.str_replace('./', '', $link);
+                $replace = '/storage'.implode('/', $path).'/'.Str::replaceFirst('./', '', $link);
             }
 
             $text = str_replace($link, $replace, $text);
