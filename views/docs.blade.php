@@ -3,9 +3,13 @@
 @section('content')
     <div class="layout-docs relative" id="docs">
 
+        <div id="burger" class="fixed cursor-pointer lg:hidden z-20 p-2 h-10 w-10 rounded-full inline-block text-center align-middle" style="background: #f5f5fa;bottom: 1rem;left: 1rem; color: var(--primary)">
+            <i class="fas fa-bars "></i>    
+        </div>
+
         <div class="container mx-auto block lg:flex">
             
-            <aside class="sidebar sticky overflow-visible top-0 pt-12 hidden lg:block">
+            <aside class="sidebar fixed z-10 overflow-visible top-0 pt-12 block" style="left:-250px;">
                 <div class="logo">
                     @include('docdress::logo')
                 </div>
@@ -50,13 +54,39 @@
 
     </div>
 
+    <x-style lang="scss">
+        aside.sidebar {
+            transition: left 0.25s ease;
+
+            &__show{
+                left: 0 !important;
+            }
+        }
+        .burger__in-sidebar{
+            transition: left 0.25s ease;
+            left: 190px !important;
+        }
+    </x-style>
+
     <x-script>
+        ready(function() {
+            let burger = document.getElementById('burger')
+
+            burger.addEventListener('click', function() {
+                let sidebar = document.querySelector('aside.sidebar')
+
+                sidebar.classList.toggle('sidebar__show')
+                burger.classList.toggle('burger__in-sidebar')
+            })
+        });
         ready(function() {
             let section = window.location.href.split('#')[1];
             if(!section) {
                 return;
             }
             document.querySelector('a[name="'+section+'"]').scrollIntoView(true)
+
+            
         });
         function isElementAboveScreen(el) {
             //special bonus for those using jQuery
