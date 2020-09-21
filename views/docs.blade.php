@@ -3,13 +3,13 @@
 @section('content')
     <div class="layout-docs relative" id="docs">
 
-        <div id="burger" class="fixed cursor-pointer lg:hidden z-20 p-2 h-10 w-10 rounded-full inline-block text-center align-middle" style="background: #f5f5fa;bottom: 1rem;left: 1rem; color: var(--primary)">
+        <div id="burger" class="fixed cursor-pointer z-20 p-2 h-10 w-10 rounded-full inline-block text-center align-middle lg:hidden" style="background: #f5f5fa;bottom: 1rem;left: 1rem; color: var(--primary)">
             <i class="fas fa-bars "></i>    
         </div>
 
         <div class="container mx-auto block lg:flex">
             
-            <aside class="sidebar fixed z-10 overflow-visible top-0 pt-12 block" style="left:-250px;">
+            <aside class="sidebar fixed z-10 overflow-visible top-0 pt-12 block lg:sticky" style="left:-250px;">
                 <div class="logo">
                     @include('docdress::logo')
                 </div>
