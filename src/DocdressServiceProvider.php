@@ -38,11 +38,11 @@ class DocdressServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../publish/public' => public_path('docdress'),
-        ], 'assets');
+        ], 'docdress:assets');
 
         $this->publishes([
             __DIR__.'/../publish/config/docdress.php' => config_path('docdress.php'),
-        ], 'config');
+        ], 'docdress:config');
 
         $this->mergeConfigFrom(
             __DIR__.'/../publish/config/docdress.php', 'docdress'
