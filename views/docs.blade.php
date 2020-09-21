@@ -3,9 +3,9 @@
 @section('content')
     <div class="layout-docs relative" id="docs">
 
-        <div class="container mx-auto flex">
+        <div class="container mx-auto block lg:flex">
             
-            <aside class="sidebar sticky overflow-visible top-0 pt-12">
+            <aside class="sidebar sticky overflow-visible top-0 pt-12 hidden lg:block">
                 <div class="logo">
                     @include('docdress::logo')
                 </div>
@@ -17,16 +17,16 @@
                 </nav>
             </aside>
 
-            <section class="p-24 pt-12 flex-1">
-                <header class="flex pb-12">
+            <section class="p-10 lg:p-24 pt-12 flex-1">
+                <header class="block lg:flex pb-12">
                     
                     <div class="
-                        w-3/4
+                        w-full lg:w-3/4
                     ">
                         @include('docdress::search')
                     </div>
                     <div class="
-                        w-1/4 pl-4 flex
+                        w-full lg:w-1/4 lg:pl-4 flex
                     ">
                         @include('docdress::version')
                         <a class="leading-10 pt-2 px-4 text-black" href="{{ $blob ?? "https://github.com/{$repo}" }}" target="_blank">
