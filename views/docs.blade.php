@@ -68,6 +68,10 @@
         }
     </x-style>
 
+    <script>
+        gid = "{{ $config->google_analytics_id ?? "" }}";
+    </script>
+
     <x-script>
         ready(function() {
             let burger = document.getElementById('burger')
@@ -85,8 +89,6 @@
                 return;
             }
             document.querySelector('a[name="'+section+'"]').scrollIntoView(true)
-
-            
         });
         function isElementAboveScreen(el) {
             //special bonus for those using jQuery
@@ -115,6 +117,12 @@
 
             if(hash !== null) {
                 window.history.replaceState({}, document.title, '#'+hash);
+                
+                if(typeof(gtag) == "function") {
+                    gtag("config", gid, {
+                        "page_path": window.location.pathname + window.location.hash,
+                    });
+                }
             } else {
                 removeHash()
             }
