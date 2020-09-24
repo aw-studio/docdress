@@ -110,10 +110,7 @@
                 if (!window.history.pushState) {
                     return;    
                 }
-                hash = el.id;
-
-                console.log(hash)
-                
+                hash = el.id;                
             });
 
             if(hash !== null) {
@@ -124,9 +121,9 @@
         }
         function removeHash () { 
             var scrollV, scrollH, loc = window.location;
-            if ("pushState" in history)
-                history.pushState("", document.title, loc.pathname + loc.search);
-            else {
+            if ("replaceState" in history) {
+                history.replaceState("", document.title, loc.pathname + loc.search);
+            } else {
                 // Prevent scrolling by storing the page's current scroll offset
                 scrollV = document.body.scrollTop;
                 scrollH = document.body.scrollLeft;
