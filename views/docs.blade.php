@@ -14,11 +14,7 @@
                     @include('docdress::logo')
                 </div>
                 
-                <nav class="absolute overflow-y-scroll bottom-0 left-0 right-0 py-6" style="top:6rem;">
-                    
-                    @include('docdress::index')
-                    
-                </nav>
+                @include('docdress::nav')
             </aside>
 
             <section class="p-10 lg:p-24 pt-12 flex-1">
@@ -46,6 +42,8 @@
 
                 <div class="content w-full lg:w-3/4">
                     {!! $content !!}
+
+                    @includeIf('docdress::footer')
                 </div>
                 
             </section>
