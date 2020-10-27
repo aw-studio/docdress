@@ -66,9 +66,11 @@
         }
     </x-style>
 
-    <script>
-        gid = "{{ $config->google_analytics_id ?? "" }}";
-    </script>
+    @if($config->ga_anchor_tracking ?? false)
+        <script>
+            gid = "{{ $config->google_analytics_id ?? "" }}";
+        </script>
+    @endif
 
     <x-script>
         ready(function() {
