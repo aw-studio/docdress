@@ -5,6 +5,9 @@ Laravel project.
 
 ![Docdress](screen.png 'Docdress')
 
+The example image shows the [litstack documenation](https://litstack.io/docs),
+[here](https://github.com/litstack/litstack.io) you find the git repository.
+
 ## Table Of Contents
 
 -   [Introduction](#introduction)
@@ -245,6 +248,8 @@ And the `token` from your config must be specified.
 <a name="algolia"></a>
 
 ### Algolia
+
+![Docdress Search](search.png 'Docdress Search')
 
 [Algolia Docsearch](https://docsearch.algolia.com/) can be used for the search
 of your documenation. All you have to do is to specify your **application key**
