@@ -1,12 +1,13 @@
 # Docdress
 
 A package to create markdown documentations from GitHub repositories in your
-Laravel project.
+Laravel project. Easy editing for contributors.
 
 ![Docdress](screen.png 'Docdress')
 
-The example image shows the [litstack documenation](https://litstack.io/docs),
-[here](https://github.com/litstack/litstack.io) you find the git repository.
+The example image shows the [litstack documenation](https://litstack.io/docs).
+The GitHub repository can be found under
+[litstack/litstack.io](https://github.com/litstack/litstack.io).
 
 ## Table Of Contents
 
