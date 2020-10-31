@@ -59,9 +59,9 @@ class Documentor
      */
     public function index($repo, $version, $subfolder = null)
     {
-        return $this->cache->remember("docs.index.{$repo}.{$version}", 5, function () use ($repo, $version) {
+        return $this->cache->remember("docs.index.{$repo}.{$version}", 5, function () use ($repo, $version, $subfolder) {
             $content = Str::after($this->parser->parse(
-                $this->files->get($this->path($repo, $version, 'readme')),
+                $this->files->get($this->path($repo, $version, 'readme', $subfolder)),
                 [
 
                 ]
@@ -116,8 +116,8 @@ class Documentor
      */
     public function get($repo, $version, $page, $subfolder = null)
     {
-        return $this->cache->remember("docs.{$repo}.{$version}.{$page}", 5, function () use ($repo, $version, $page) {
-            if (! $this->exists($repo, $version, $page)) {
+        return $this->cache->remember("docs.{$repo}.{$version}.{$page}", 5, function () use ($repo, $version, $page, $subfolder) {
+            if (! $this->exists($repo, $version, $page, $subfolder)) {
                 return;
             }
 
@@ -132,7 +132,7 @@ class Documentor
             ];
 
             return $this->parser->parse(
-                $this->files->get($this->path($repo, $version, $page)),
+                $this->files->get($this->path($repo, $version, $page, $subfolder)),
                 $parser
             );
         });

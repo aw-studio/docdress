@@ -96,9 +96,11 @@ class DocdressController
             $page .= "/{$subPage}";
         }
 
-        $content = $this->getContent($repo, $version, $page);
+        $content = $this->getContent(
+            $repo, $version, $page, $subfolder = config("docdress.repos.{$repo}.subfolder")
+        );
 
-        $index = $this->docs->index($repo, $version, 'readme');
+        $index = $this->docs->index($repo, $version, $subfolder);
         $theme = $this->docs->theme($repo);
 
         $title = (new Crawler($content))->filterXPath('//h1');
@@ -125,12 +127,13 @@ class DocdressController
      * @param  string $repo
      * @param  string $version
      * @param  string $page
+     * @param  string $subfolder
      * @return string
      */
-    protected function getContent($repo, $version, $page)
+    protected function getContent($repo, $version, $page, $subfolder = null)
     {
-        if ($this->docs->exists($repo, $version, $page)) {
-            return $this->docs->get($repo, $version, $page);
+        if ($this->docs->exists($repo, $version, $page, $subfolder)) {
+            return $this->docs->get($repo, $version, $page, $subfolder);
         }
 
         return (string) view('docdress::not-found');
