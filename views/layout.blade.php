@@ -33,7 +33,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
+    @foreach(config('docdress.languages') as $lang)
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-{{ $lang }}.min.js" integrity="sha512-GmgKUnHH5uS7wYxWtWI39hCrpUIK0o+ej5NKD9lNCIvvRKpXnb44+j7aPxSKA1n0bpjeDVAnDzZeP5ehSMlrNA==" crossorigin="anonymous"></script>
+    @endforeach
     <script src="/docdress/js/app.js"></script>
 
     @includeIf('docdress::styles')

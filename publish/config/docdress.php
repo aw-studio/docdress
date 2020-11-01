@@ -27,6 +27,24 @@ return [
 
     /*
      |--------------------------------------------------------------------------
+     | Docdress Languages
+     |--------------------------------------------------------------------------
+     |
+     | The languages that should be highlighted by prism.js. See the full list
+     | of available languages here: https://prismjs.com/download.html#themes=prism
+     |
+     */
+
+    'languages' => [
+        'bash',
+        'php',
+        'css',
+        'html',
+        'javascript',
+    ],
+
+    /*
+     |--------------------------------------------------------------------------
      | Docdress Repositories
      |--------------------------------------------------------------------------
      |
@@ -92,7 +110,6 @@ return [
         \Docdress\Parser\LinkParser::class,
         \Docdress\Parser\TocParser::class,
         \Docdress\Parser\AlertParser::class,
-        \Docdress\Parser\LatexParser::class,
         \Docdress\Parser\CodePathParser::class,
         \Docdress\Parser\LinkNameParser::class,
         \Docdress\Parser\TableParser::class,
