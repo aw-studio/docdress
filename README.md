@@ -61,6 +61,13 @@ Now publish the required assets and the config:
 php artisan vendor:publish --provider="Docdress\DocdressServiceProvider"
 ```
 
+You may also publish the `config` or `assets`only like this:
+
+```shell
+php artisan vendor:publish --tag="docdress:assets"
+php artisan vendor:publish --tag="docdress:config"
+```
+
 <a name="add-repository-to-config"></a>
 
 ### Add repository to Config
