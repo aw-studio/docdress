@@ -75,6 +75,10 @@ p a {
 ul {
 }
 
+ol {
+	@apply list-decimal;
+}
+
 table {
 	th {
 	}

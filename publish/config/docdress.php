@@ -75,4 +75,26 @@ return [
             'algolia-icon-color' => '#090910',
         ],
     ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Markdown Parser
+     |--------------------------------------------------------------------------
+     |
+     | The parser that should be used to generate html. Parser's are executed
+     | in the given order.
+     |
+     */
+
+    'parser' => [
+        \Docdress\Parser\SrcParser::class,
+        \Docdress\Parser\CodeParser::class,
+        \Docdress\Parser\LinkParser::class,
+        \Docdress\Parser\TocParser::class,
+        \Docdress\Parser\AlertParser::class,
+        \Docdress\Parser\LatexParser::class,
+        \Docdress\Parser\CodePathParser::class,
+        \Docdress\Parser\LinkNameParser::class,
+        \Docdress\Parser\TableParser::class,
+    ],
 ];

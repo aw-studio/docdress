@@ -2,13 +2,6 @@
 
 namespace Docdress;
 
-use Docdress\Parser\AlertParser;
-use Docdress\Parser\CodeParser;
-use Docdress\Parser\CodePathParser;
-use Docdress\Parser\LinkNameParser;
-use Docdress\Parser\LinkParser;
-use Docdress\Parser\SrcParser;
-use Docdress\Parser\TocParser;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -121,21 +114,21 @@ class Documentor
                 return;
             }
 
-            $parser = [
-                TocParser::class,
-                AlertParser::class,
-                CodePathParser::class,
-                CodeParser::class,
-                SrcParser::class,
-                LinkParser::class,
-                LinkNameParser::class,
-            ];
-
             return $this->parser->parse(
                 $this->files->get($this->path($repo, $version, $page, $subfolder)),
-                $parser
+                $this->getParser(),
             );
         });
+    }
+
+    /**
+     * Get parser.
+     *
+     * @return array
+     */
+    protected function getParser()
+    {
+        return config('docdress.parser');
     }
 
     /**
