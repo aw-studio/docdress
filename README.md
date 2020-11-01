@@ -3,7 +3,7 @@
 A package to create markdown documentations from GitHub repositories in your
 Laravel project. Easy editing for contributors.
 
-![Docdress](screen.png 'Docdress')
+![Docdress](screens/screen.png 'Docdress')
 
 The example image shows the [litstack documenation](https://litstack.io/docs).
 The GitHub repository can be found under
@@ -226,11 +226,11 @@ folder is cloned and displayed.
 If you want the latest version to be automatically updated with every push, you
 have to set a webhook with the url `_docdress/update`.
 
-![webhook-url](webhook-url.png 'Webhook Url')
+![webhook-url](screens/webhook-url.png 'Webhook Url')
 
 Additionally the **Content-Type** must be set to `application/json`.
 
-![webhook-content-type](webhook-content-type.png 'Webhook Content Type')
+![webhook-content-type](screens/webhook-content-type.png 'Webhook Content Type')
 
 And the `token` from your config must be specified.
 
@@ -250,7 +250,7 @@ And the `token` from your config must be specified.
 
 ### Algolia
 
-![Docdress Search](search.png 'Docdress Search')
+![Docdress Search](screens/search.png 'Docdress Search')
 
 [Algolia Docsearch](https://docsearch.algolia.com/) can be used for the search
 of your documenation. All you have to do is to specify your **application key**
@@ -319,9 +319,9 @@ Hello World!
 :::
 ```
 
-![alert-tip](alert-tip.png 'Alert Tip')
-![alert-warning](alert-warning.png 'Alert Warning')
-![alert-danger](alert-danger.png 'Alert Danger')
+![alert-tip](screens/alert-tip.png 'Alert Tip')
+![alert-warning](screens/alert-warning.png 'Alert Warning')
+![alert-danger](screens/alert-danger.png 'Alert Danger')
 
 <a name="search-component">
 
