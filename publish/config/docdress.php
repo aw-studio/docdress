@@ -95,5 +95,6 @@ return [
         \Docdress\Parser\LatexParser::class,
         \Docdress\Parser\CodePathParser::class,
         \Docdress\Parser\LinkNameParser::class,
+        \Docdress\Parser\TableParser::class,
     ],
 ];

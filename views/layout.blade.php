@@ -36,6 +36,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
     <script src="/docdress/js/app.js"></script>
 
+    @includeIf('docdress::styles')
+
 </head>
 <body>
     

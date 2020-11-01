@@ -21,6 +21,10 @@ class SrcParser implements HtmlParserInterface
                 continue;
             }
 
+            if (Str::startsWith($link, '/')) {
+                continue;
+            }
+
             if (array_key_exists('host', parse_url($link))) {
                 $replace = "{$link}";
             } else {
