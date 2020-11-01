@@ -2,10 +2,66 @@
 
 namespace Docdress;
 
+use Closure;
+use Docdress\Contracts\Git as GitContract;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
 
-class Git
+class Git implements GitContract
 {
+    /**
+     * Url resolver. Resolves the path or url to a git repository.
+     *
+     * @var Closure
+     */
+    protected $urlResolver;
+
+    /**
+     * Filesystem instance.
+     *
+     * @var Filesystem
+     */
+    protected $files;
+
+    /**
+     * Create new Git instance.
+     *
+     * @param  Filesystem $files
+     * @return void
+     */
+    public function __construct(Filesystem $files)
+    {
+        $this->files = $files;
+        $this->urlResolver = $this->getDefaultUrlResolver();
+    }
+
+    /**
+     * Get default url resolver.
+     *
+     * @return Closure
+     */
+    protected function getDefaultUrlResolver(): Closure
+    {
+        return function ($repo, $token = null) {
+            if ($token) {
+                return "https://{$token}@github.com/{$repo}.git";
+            }
+
+            return "https://github.com/{$repo}.git";
+        };
+    }
+
+    /**
+     * Set url resolver.
+     *
+     * @param  Closure $resolver
+     * @return void
+     */
+    public function setUrlResolver(Closure $resolver)
+    {
+        $this->urlResolver = $resolver;
+    }
+
     /**
      * Pull or clone repository.
      *
@@ -15,12 +71,12 @@ class Git
      * @param  string      $token
      * @return void
      */
-    public static function pullOrClone($repo, $branch = 'master', $subfolder = null, $token = null)
+    public function pullOrClone($repo, $branch = 'master', $subfolder = null, $token = null)
     {
-        if (realpath(self::path($repo, $branch))) {
-            return self::pull($repo, $branch);
+        if (realpath($this->path($repo, $branch))) {
+            return $this->pull($repo, $branch);
         } else {
-            return self::clone($repo, $branch, $subfolder, $token);
+            return $this->clone($repo, $branch, $subfolder, $token);
         }
     }
 
@@ -32,12 +88,12 @@ class Git
      * @param  string|null $token
      * @return void
      */
-    public static function clone($repo, $branch, $subfolder, $token = null)
+    public function clone($repo, $branch = 'master', $subfolder = null, $token = null)
     {
         if (! is_null($subfolder)) {
-            return self::cloneSubfolder($repo, $branch, $subfolder, $token);
+            return $this->cloneSubfolder($repo, $branch, $subfolder, $token);
         } else {
-            return self::cloneRoot($repo, $branch, $token);
+            return $this->cloneRoot($repo, $branch, $token);
         }
     }
 
@@ -48,9 +104,9 @@ class Git
      * @param  string $branch
      * @return void
      */
-    public static function pull($repo, $branch = 'master')
+    public function pull($repo, $branch = 'master')
     {
-        $path = self::path($repo, $branch);
+        $path = $this->path($repo, $branch);
 
         exec("cd {$path} && git pull");
     }
@@ -64,15 +120,15 @@ class Git
      * @param  string|null $token
      * @return void
      */
-    protected static function cloneSubfolder($repo, $branch, $folder, $token = null)
+    protected function cloneSubfolder($repo, $branch, $folder, $token = null)
     {
-        $path = self::path($repo, $branch);
+        $path = $this->path($repo, $branch);
 
         File::ensureDirectoryExists($path);
         exec('
             cd '.$path.' \
             && git init \
-            && git remote add -f origin '.self::cloneUrl($repo, $token).' \
+            && git remote add -f origin '.$this->cloneUrl($repo, $token).' \
             && git config core.sparseCheckout true \
             && echo "/'.$folder.'" >> .git/info/sparse-checkout \
             && git checkout '.$branch.' \
@@ -88,10 +144,10 @@ class Git
      * @param  string|null $token
      * @return void
      */
-    protected static function cloneRoot($repo, $branch, $token = null)
+    protected function cloneRoot($repo, $branch, $token = null)
     {
-        $path = self::path($repo, $branch);
-        $url = self::cloneUrl($repo, $token);
+        $path = $this->path($repo, $branch);
+        $url = $this->cloneUrl($repo, $token);
 
         exec('
             git clone -b '.$branch.' '.$url.' '.$path.' \
@@ -107,13 +163,9 @@ class Git
      * @param  string|null $token
      * @return string
      */
-    protected static function cloneUrl($repo, $token = null)
+    protected function cloneUrl($repo, $token = null)
     {
-        if ($token) {
-            return "https://{$token}@github.com/{$repo}.git";
-        }
-
-        return "https://github.com/{$repo}.git";
+        return ($this->urlResolver)($repo, $token);
     }
 
     /**
@@ -123,9 +175,9 @@ class Git
      * @param  string $branch
      * @return string
      */
-    protected static function path($repo, $branch)
+    protected function path($repo, $branch)
     {
-        $path = "resources/docs/{$repo}/{$branch}";
+        $path = resource_path("/docs/{$repo}/{$branch}");
 
         if (! app()->runningInConsole()) {
             $path = '../'.$path;
@@ -140,9 +192,9 @@ class Git
      * @param  string $version
      * @return string
      */
-    public static function status($repo, $branch)
+    public function status($repo, $branch = 'master')
     {
-        if (! realpath($path = static::path($repo, $branch))) {
+        if (! realpath($path = $this->path($repo, $branch))) {
             return State::MISSING;
         }
 

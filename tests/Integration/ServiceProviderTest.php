@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use Docdress\Contracts\Git;
 use Illuminate\Support\Facades\Blade;
 
 class ServiceProviderTest extends IntegrationTestCase
@@ -12,5 +13,11 @@ class ServiceProviderTest extends IntegrationTestCase
         $aliases = Blade::getClassComponentAliases();
 
         $this->assertArrayHasKey('dd-search-input', $aliases);
+    }
+
+    /** @test */
+    public function it_registers_git_singleton()
+    {
+        $this->assertInstanceOf(Git::class, $this->app['docdress.git']);
     }
 }

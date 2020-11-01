@@ -18,6 +18,10 @@ class DocdressServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton('docdress.git', function ($app) {
+            return new Git($app['files']);
+        });
+
         Blade::component('dd-search-input', SearchInputComponent::class);
 
         $this->commands([

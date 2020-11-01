@@ -2,12 +2,13 @@
 
 namespace Docdress\Commands;
 
-use Docdress\Git;
+use Docdress\Support\Git;
 use Illuminate\Console\Command;
 
 class UpdateCommand extends Command
 {
     use Concerns\ManagesScreens;
+
     /**
      * The name and signature of the console command.
      *

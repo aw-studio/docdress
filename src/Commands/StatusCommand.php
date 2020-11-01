@@ -2,7 +2,7 @@
 
 namespace Docdress\Commands;
 
-use Docdress\Git;
+use Docdress\Support\Git;
 use Illuminate\Console\Command;
 
 class StatusCommand extends Command
