@@ -12,7 +12,6 @@ class GitIntegrationTestCase extends IntegrationTestCase
 
         if (! realpath(__DIR__.'/repo/.git')) {
             exec('cd '.__DIR__.'/repo && git init && git add . && git commit -m "init"', $output);
-            dump($output);
         }
 
         $this->app['docdress.git']->setUrlResolver(function ($repo, $token = null) {
