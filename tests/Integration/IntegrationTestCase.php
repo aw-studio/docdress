@@ -6,6 +6,13 @@ use Orchestra\Testbench\TestCase;
 
 class IntegrationTestCase extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app['docdress.git']->setSilent(true);
+    }
+
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('docdress.repos', [

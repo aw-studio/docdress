@@ -2,6 +2,7 @@
 
 namespace Docdress;
 
+use Docdress\Commands\AssetsCommand;
 use Docdress\Commands\CloneCommand;
 use Docdress\Commands\StatusCommand;
 use Docdress\Commands\UpdateCommand;
@@ -25,6 +26,7 @@ class DocdressServiceProvider extends ServiceProvider
         Blade::component('dd-search-input', SearchInputComponent::class);
 
         $this->commands([
+            AssetsCommand::class,
             CloneCommand::class,
             UpdateCommand::class,
             StatusCommand::class,

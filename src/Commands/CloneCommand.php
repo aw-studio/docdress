@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\File;
 
 class CloneCommand extends Command
 {
-    use Concerns\ManagesScreens;
-
     /**
      * The name and signature of the console command.
      *
@@ -44,9 +42,10 @@ class CloneCommand extends Command
 
         foreach (config("docdress.repos.{$repo}.versions") as $version => $title) {
             Git::clone($repo, $version, $subfolder, $token);
-            $this->publishScreens($repo, $version, $subfolder);
             $this->info("Cloned {$repo}[$version]");
         }
+
+        $this->call('docdress:assets', ['repository' => $repo]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Docdress;
 use Closure;
 use Docdress\Contracts\Git as GitContract;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 
 class Git implements GitContract
@@ -24,6 +25,13 @@ class Git implements GitContract
     protected $files;
 
     /**
+     * Set silent.
+     *
+     * @var bool
+     */
+    protected $silent = false;
+
+    /**
      * Create new Git instance.
      *
      * @param  Filesystem $files
@@ -33,6 +41,17 @@ class Git implements GitContract
     {
         $this->files = $files;
         $this->urlResolver = $this->getDefaultUrlResolver();
+    }
+
+    /**
+     * Set silent.
+     *
+     * @param  bool $silent
+     * @return void
+     */
+    public function setSilent(bool $silent)
+    {
+        $this->silent = $silent;
     }
 
     /**
@@ -108,7 +127,24 @@ class Git implements GitContract
     {
         $path = $this->path($repo, $branch);
 
-        exec("cd {$path} && git pull");
+        exec($this->cmd("cd {$path}", 'git pull'));
+    }
+
+    /**
+     * Resolve shell command.
+     *
+     * @param  array|string $cmd
+     * @return string
+     */
+    protected function cmd($cmd)
+    {
+        $cmds = collect(Arr::wrap($cmd));
+
+        if ($this->silent) {
+            $cmds = $cmds->map(fn ($cmd) => "$cmd 2> /dev/null");
+        }
+
+        return $cmds->implode(' && ');
     }
 
     /**
@@ -125,15 +161,15 @@ class Git implements GitContract
         $path = $this->path($repo, $branch);
 
         File::ensureDirectoryExists($path);
-        exec('
-            cd '.$path.' \
-            && git init \
-            && git remote add -f origin '.$this->cloneUrl($repo, $token).' \
-            && git config core.sparseCheckout true \
-            && echo "/'.$folder.'" >> .git/info/sparse-checkout \
-            && git checkout '.$branch.' \
-            && git pull origin '.$branch.'
-        ');
+        exec($this->cmd([
+            'cd '.$path,
+            'git init',
+            'git remote add -f origin '.$this->cloneUrl($repo, $token),
+            'git config core.sparseCheckout true',
+            'echo "/'.$folder.'" >> .git/info/sparse-checkout',
+            'git checkout '.$branch,
+            'git pull origin '.$branch,
+        ]));
     }
 
     /**
@@ -149,11 +185,11 @@ class Git implements GitContract
         $path = $this->path($repo, $branch);
         $url = $this->cloneUrl($repo, $token);
 
-        exec('
-            git clone -b '.$branch.' '.$url.' '.$path.' \
-            && cd '.$path.' \
-            && git remote add -f origin '.$url.'
-        ');
+        exec($this->cmd([
+            'git clone -b '.$branch.' '.$url.' '.$path,
+            'cd '.$path,
+            'git remote add -f origin '.$url,
+        ]));
     }
 
     /**

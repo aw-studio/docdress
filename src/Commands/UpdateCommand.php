@@ -7,8 +7,6 @@ use Illuminate\Console\Command;
 
 class UpdateCommand extends Command
 {
-    use Concerns\ManagesScreens;
-
     /**
      * The name and signature of the console command.
      *
@@ -48,8 +46,9 @@ class UpdateCommand extends Command
         foreach ($versions as $version => $title) {
             $subfolder = config("docdress.repos.{$repo}.subfolder");
             Git::pull($repo, $version, $subfolder);
-            $this->publishScreens($repo, $version, $subfolder);
             $this->info("Updated {$repo}[$version]");
         }
+
+        $this->call('docdress:assets', ['repository' => $repo]);
     }
 }
