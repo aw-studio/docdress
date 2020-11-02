@@ -51,6 +51,7 @@ jobs:
               run: |
                   composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.orchestra }}" --no-interaction --no-update
                   composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
             - name: Setup git
               run: |
                   git config --global user.email "lennart.carbe@gmail.com"
