@@ -23,7 +23,7 @@ class LinkParser implements HtmlParserInterface
                 continue;
             }
 
-            $text = str_replace($link, $this->modifyLink($link), $text);
+            $text = str_replace("{$link}\"", $this->modifyLink($link).'"', $text);
         }
 
         return $text;
