@@ -136,9 +136,9 @@ class Git implements GitContract
      * @param  array|string $cmd
      * @return string
      */
-    protected function cmd($cmd)
+    protected function cmd(...$cmd)
     {
-        $cmds = collect(Arr::wrap($cmd));
+        $cmds = collect(Arr::flatten($cmd));
 
         if ($this->silent) {
             $cmds = $cmds->map(fn ($cmd) => "$cmd 2> /dev/null");
@@ -213,7 +213,7 @@ class Git implements GitContract
      */
     protected function path($repo, $branch)
     {
-        $path = resource_path("/docs/{$repo}/{$branch}");
+        $path = resource_path("docs/{$repo}/{$branch}");
 
         if (! app()->runningInConsole()) {
             $path = '../'.$path;
