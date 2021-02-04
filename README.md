@@ -90,7 +90,7 @@ Once you have configured the repository, you must clone it using
 `docdress:clone`:
 
 ```shell
-php artisan docdress:clone `my/repo`
+php artisan docdress:clone "my/repo"
 ```
 
 <a name="structure"></a>
