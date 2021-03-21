@@ -17,7 +17,12 @@ currentVersion = "{{ $currentVersion }}";
 
 <x-script>
     function changeVersion(version) {
-        Turbolinks.visit(window.location.pathname.replace(currentVersion, version), {action:'replace'})
+        let url = window.location.pathname.replace(currentVersion, version);
+        if(typeof Tubolinks === 'undefined') {
+            window.location.href = url;
+        } else {
+            Turbolinks.visit(url, {action:'replace'});
+        }
     }
 </x-script>
 
